@@ -1,0 +1,185 @@
+/* src/styles/App.css */
+
+.app-container {
+  display: flex;
+  height: 100vh; /* Full height to fit the viewport */
+}
+
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #ddd;
+  height: 100vh; /* Full height */
+  position: fixed; /* Fixed positioning to avoid overlap */
+  top: 0;
+  left: 0;
+  transition: width 0.3s ease; /* Transition for width */
+  z-index: 1000;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  padding-top: 20px;
+}
+
+.sidebar.collapsed {
+  width: 60px; /* Adjust width for collapsed state */
+}
+
+.main-area {
+  flex-grow: 1;
+  margin-left: 250px; /* Default margin to accommodate the sidebar */
+  transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
+}
+
+.app-container.sidebar-collapsed .main-area {
+  margin-left: 60px; /* Adjust margin for collapsed sidebar */
+}
+
+.main-content {
+  padding: 20px; /* Padding inside the main content for spacing */
+  margin-top: 20px; /* Top margin to avoid overlap with header */
+}
+
+.footer {
+/*  margin-left: 250px; /* Default margin to accommodate the sidebar */
+  transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
+}
+
+.app-container.sidebar-collapsed .footer {
+  margin-left: 60px; /* Adjust margin for collapsed sidebar */
+}
+
+/* Add additional global styles below */
+/* Global Modal Styling */
+/* Modal Fade and Slide Animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-content {
+  animation: modalFadeIn 0.5s ease;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  position: relative;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+.modal-header {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Feedback Modal Specific Styling */
+.feedback-modal .feedback-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.feedback-message {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.feedback-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feedback-button:hover {
+  background-color: #0056b3;
+}
+
+/* Success and Error Backgrounds */
+.success-bg {
+  background-color: #e6f7e6;
+  border-left: 5px solid #28a745;
+}
+
+.error-bg {
+  background-color: #ffe6e6;
+  border-left: 5px solid #dc3545;
+}
+
+/* Spinner Animation */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  margin: 0 5px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover {
+  background-color: #0056b3;
+}
+
+/* Placeholder for an Image */
+.image-placeholder img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.update-entry {
+  background-color: #f9f9f9;
+  border-left: 3px solid #007bff;
+  padding: 10px;
+  margin: 10px 0;
+}
+.update-entry strong {
+  color: #007bff;
+}
+

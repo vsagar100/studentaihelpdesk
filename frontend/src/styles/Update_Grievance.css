@@ -1,0 +1,9 @@
+.update-entry {
+  background-color: #f9f9f9;
+  border-left: 3px solid #007bff;
+  padding: 10px;
+  margin: 10px 0;
+}
+.update-entry strong {
+  color: #007bff;
+}

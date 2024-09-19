@@ -1,0 +1,179 @@
+/* src/styles/SignUp.css */
+
+.signup-container {
+  display: flex;
+  width: 100%; /* Full width of parent container */
+  height: 100vh; /* Full viewport height */
+}
+
+.signup-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff; /* Fallback color */
+}
+
+.signup-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the left section */
+}
+
+.signup-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the start (top) */
+  background-color: #ffffff;
+  padding: 40px 20px; /* Added top padding to ensure heading is visible */
+  max-height: 100vh; /* Prevents content from overflowing the viewport */
+  overflow-y: auto; /* Adds vertical scrollbar if content exceeds container height */
+}
+
+.signup-form {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.signup-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333333;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  padding-right: 20px; /* Added padding for spacing */
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #333333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #333333;
+}
+
+.form-group small {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #666666;
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.signup-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.signup-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Align checkbox and label text */
+.checkbox-container {
+  display: flex;
+  align-items: center; /* Align vertically */
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 8px; /* Space between checkbox and label */
+}
+
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #333333;
+}
+
+.modal-content p,
+.modal-content ul {
+  color: #666666;
+  font-size: 16px;
+}
+
+.modal-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: #333333;
+  cursor: pointer;
+}

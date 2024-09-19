@@ -1,0 +1,29 @@
+/* src/styles/Terms.css */
+
+.terms-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.terms-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333333;
+}
+
+.terms-container p,
+.terms-container ul {
+  font-size: 16px;
+  color: #666666;
+  margin-bottom: 10px;
+}
+
+.terms-container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
