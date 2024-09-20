@@ -2,21 +2,21 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../GlobalState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
-import '../styles/StudentHelpdesk.css';  // Your CSS file with improved styles
+import '../styles/StudentHelpdesk.css';
 
 const StudentHelpdesk = () => {
   const { BACKEND_API_URL } = useContext(GlobalContext);
   const [description, setDescription] = useState('');
-  const [chatHistory, setChatHistory] = useState([]);  // Array to keep track of all messages
+  const [chatHistory, setChatHistory] = useState([]); // Array to keep track of all messages
   const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);  // Loading state for button animation
+  const [isLoading, setIsLoading] = useState(false); // Loading state for button animation
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!description.trim()) return;  // Prevent submitting empty queries
+    if (!description.trim()) return; // Prevent submitting empty queries
 
     // Add user's message to chat history
-    setChatHistory([...chatHistory, { role: 'user', content: description }]);
+    setChatHistory([{ role: 'user', content: description }, ...chatHistory]);
     setError('');
     setIsLoading(true);
 
@@ -31,8 +31,8 @@ const StudentHelpdesk = () => {
 
       if (res.ok) {
         // Append ChatGPT/FAQ response to chat history
-        setChatHistory([...chatHistory, { role: 'user', content: description }, { role: 'assistant', content: data.answer }]);
-        setDescription('');  // Clear input field
+        setChatHistory([{ role: 'assistant', content: data.answer }, { role: 'user', content: description }, ...chatHistory]);
+        setDescription(''); // Clear input field
       } else {
         setError(data.error || 'An error occurred');
       }
@@ -44,21 +44,8 @@ const StudentHelpdesk = () => {
 
   return (
     <div className="helpdesk-container">
-      <h2 className="helpdesk-header">Student AI Helpdesk</h2>
-      
-      {/* Chat history */}
-      <div className="chat-history">
-        {chatHistory.map((message, index) => (
-          <div key={index} className={`chat-message ${message.role}`}>
-            <strong>{message.role === 'user' ? 'You' : 'AI Assistant'}:</strong>
-            <p>{message.content}</p>
-          </div>
-        ))}
-        {isLoading && <div className="loading-spinner">AI is thinking...</div>}
-      </div>
-
-      {/* Input form */}
       <form onSubmit={handleSubmit} className="helpdesk-form">
+        {/* Input form on top */}
         <textarea
           placeholder="Ask your query..."
           className="form-control query-input"
@@ -76,6 +63,17 @@ const StudentHelpdesk = () => {
           )}
         </button>
       </form>
+
+      {/* Chat history below */}
+      <div className="chat-history">
+        {chatHistory.map((message, index) => (
+          <div key={index} className={`chat-message ${message.role}`}>
+            <strong>{message.role === 'user' ? 'You' : 'AI Assistant'}:</strong>
+            <p>{message.content}</p>
+          </div>
+        ))}
+        {isLoading && <div className="loading-spinner">AI is thinking...</div>}
+      </div>
 
       {/* Error handling */}
       {error && (
