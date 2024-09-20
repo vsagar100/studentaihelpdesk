@@ -1,14 +1,16 @@
 from flask import Flask, request, jsonify, current_app, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import or_
 from models import FAQ
 import requests
 import os
+import openai
 
 faq_bp = Blueprint('faq', __name__)
 
 
-api_key = current_app.config['OPENAI_API_KEY']
+openai.api_key = current_app.config['OPENAI_API_KEY']
 api_url = current_app.config['OPENAI_API_URL']
 gpt_model = current_app.config['GPT_MODEL']
 
@@ -59,15 +61,35 @@ def get_chatgpt_response(query):
 # Route to handle student queries
 @faq_bp.route('/query', methods=['POST'])
 def handle_query():
-    data = request.json
-    query = data.get('description')
+    data = request.get_json()
+    description = data.get('description')
 
-    if not query:
-        return jsonify({'error': 'Description is required'}), 400
+    if not description:
+        return jsonify({"error": "No description provided"}), 400
 
-    # Send query to ChatGPT with FAQs context
-    chatgpt_answer = get_chatgpt_response(query)
-    return jsonify({'answer': chatgpt_answer}), 200
+    # Try to find relevant FAQs in the database
+    faqs = FAQ.query.filter(or_(FAQ.question.ilike(f"%{description}%"), FAQ.answer.ilike(f"%{description}%"))).all()
+
+    if faqs:
+        # If matching FAQs found, return the first match (or combine multiple answers)
+        return jsonify({"answer": faqs[0].answer}), 200
+
+    # Fallback to ChatGPT if no FAQs match
+    try:
+        response = openai.ChatCompletion.create(
+            model=gpt_model,  # Adjust this to the model you are using
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant for students."},
+                {"role": "user", "content": description}
+            ],
+            temperature=0.7
+        )
+        answer = response['choices'][0]['message']['content']
+        return jsonify({"answer": answer}), 200
+
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=True)
