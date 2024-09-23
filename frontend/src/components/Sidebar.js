@@ -12,6 +12,7 @@ const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
     menuItems = [
       { path: '/student/dashboard', label: 'Dashboard', icon: faHome },
       { path: '/student/helpdesk', label: 'Question', icon: faQuestionCircle },
+      { path: '/student/addfaq', label: 'Add FAQ', icon: faCog },
       { path: '/student/my-grievances', label: 'My Grievances', icon: faUser },
       { path: '/student/resources', label: 'Resources', icon: faBook },
       { path: '/student/profile', label: 'Profile', icon: faUser },

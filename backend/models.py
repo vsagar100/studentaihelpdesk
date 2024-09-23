@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt, generate_password_hash, check_password_hash
+from flask import jsonify, json
 from app import db
 import datetime  # Import the datetime module
 
@@ -36,6 +37,15 @@ class FAQ(db.Model):
     question = db.Column(db.Text, nullable=False)
     keywords = db.Column(db.Text, nullable=False)  # Keywords for matching
     answer = db.Column(db.Text, nullable=False)
+    embedding = db.Column(db.Text, nullable=True)
+    
+    def set_embedding(self, embedding_vector):
+        # Convert embedding list to JSON string
+        self.embedding = json.dumps(embedding_vector)
+
+    def get_embedding(self):
+        # Convert JSON string back to Python list
+        return json.loads(self.embedding)
 
 
 class Grievance(db.Model):

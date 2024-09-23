@@ -8,6 +8,7 @@ import StudentDashboard from './components/StudentDashboard';
 import StaffDashboard from './components/StaffDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import StudentHelpdesk from './components/StudentHelpdesk';
+import AddFAQ from './components/AddFAQ';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Test from './components/Test';
@@ -80,6 +81,9 @@ function App() {
                 )}
                 {userRole === 'Student' && (
                   <Route path="/student/helpdesk" element={<StudentHelpdesk />} />
+                )}
+                {userRole === 'Student' && (
+                  <Route path="/student/addfaq" element={<AddFAQ />} />
                 )}
                 {/* Redirect root path to sign-in */}
                 <Route path="/" element={<Navigate to="/signin" />} />

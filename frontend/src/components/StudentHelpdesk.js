@@ -41,6 +41,29 @@ const StudentHelpdesk = () => {
     }
     setIsLoading(false);
   };
+  /*
+  const handleOnClickAdd = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(`${BACKEND_API_URL}/api/add_faq`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("FAQs embedded successfully!");
+         } else {
+        setError(data.error || 'An error occurred');
+      }
+    } catch (err) {
+      setError('Failed to submit query');
+    }
+    setIsLoading(false);
+  };
+  */
 
   return (
     <div className="helpdesk-container">
@@ -53,6 +76,17 @@ const StudentHelpdesk = () => {
           onChange={(e) => setDescription(e.target.value)}
           required
         />
+        {/*
+        <button type="button" onClick={handleOnClickAdd} className={`btn btn-primary submit-btn ${isLoading ? 'loading' : ''}`}>
+          {isLoading ? (
+            <span className="loading-spinner"></span>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faPaperPlane} /> Embed FAQs
+            </>
+          )}
+        </button> */}
+        
         <button type="submit" className={`btn btn-primary submit-btn ${isLoading ? 'loading' : ''}`}>
           {isLoading ? (
             <span className="loading-spinner"></span>
