@@ -60,7 +60,8 @@ def signin():
                 "user_id": user.user_id,
                 "username": user.username,
                 "email": user.email,
-                "role": user.role
+                "role": user.role,
+                "file_path" : request.host_url + "uploads/" + user.file_path if user.file_path else None
             }
         }), 200
 

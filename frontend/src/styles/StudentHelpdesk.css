@@ -1,6 +1,7 @@
 /* Container for the helpdesk */
 .helpdesk-container {
   max-width: 100%; /* Full width */
+  width: 100%;
   margin: 20px auto;
   padding: 20px;
   background-color: #f9f9f9;

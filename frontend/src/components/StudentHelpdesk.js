@@ -2,14 +2,15 @@ import React, { useState, useContext } from 'react';
 import { GlobalContext } from '../GlobalState';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import FeedbackModal from './FeedbackModal';
 import '../styles/StudentHelpdesk.css';
 
 const StudentHelpdesk = () => {
   const { BACKEND_API_URL } = useContext(GlobalContext);
   const [description, setDescription] = useState('');
   const [chatHistory, setChatHistory] = useState([]); // Array to keep track of all messages
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false); // Loading state for button animation
+  const [feedback, setFeedback] = useState({ show: false, type: '', message: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,7 +18,6 @@ const StudentHelpdesk = () => {
 
     // Add user's message to chat history
     setChatHistory([{ role: 'user', content: description }, ...chatHistory]);
-    setError('');
     setIsLoading(true);
 
     try {
@@ -34,13 +34,26 @@ const StudentHelpdesk = () => {
         setChatHistory([{ role: 'assistant', content: data.answer }, { role: 'user', content: description }, ...chatHistory]);
         setDescription(''); // Clear input field
       } else {
-        setError(data.error || 'An error occurred');
+        showFeedback('error', 'An error occured submtting the query: ');
+        //setError(data.error || 'An error occurred');
       }
     } catch (err) {
-      setError('Failed to submit query');
+     // setError('Failed to submit query');
+      console.error('Failed to submit query:', err);
+      showFeedback('error', 'Failed to submit query: ' + err.message);
     }
     setIsLoading(false);
   };
+  
+  const showFeedback = (type, message) => {
+    setFeedback({ show: true, type, message });
+  };
+  
+  // Function to close feedback modal
+  const handleCloseFeedback = () => {
+    setFeedback({ show: false, type: '', message: '' });
+  };
+  
   /*
   const handleOnClickAdd = async (e) => {
     e.preventDefault();
@@ -67,6 +80,12 @@ const StudentHelpdesk = () => {
 
   return (
     <div className="helpdesk-container">
+      <FeedbackModal
+        show={feedback.show}
+        handleClose={handleCloseFeedback}
+        type={feedback.type}
+        message={feedback.message}
+      />
       <form onSubmit={handleSubmit} className="helpdesk-form">
         {/* Input form on top */}
         <textarea
@@ -108,15 +127,9 @@ const StudentHelpdesk = () => {
         ))}
         {isLoading && <div className="loading-spinner">AI is thinking...</div>}
       </div>
-
-      {/* Error handling */}
-      {error && (
-        <div className="error-box">
-          <FontAwesomeIcon icon={faTimesCircle} className="error-icon" />
-          <p>{error}</p>
-        </div>
-      )}
     </div>
+    
+    
   );
 };
 

@@ -32,15 +32,11 @@ def load_faqs_with_embeddings():
         })
     
     return faq_data
-    
-    return faq_data
 
 # Function to create embedding using OpenAI's embedding model
 def embed_query(query):
     response = client.embeddings.create(input=query, model="text-embedding-ada-002")
     embedding = response.data[0].embedding  # Get embedding vector from the response
-    print("embed_query")
-    #print(embedding)
     return embedding
 
 # Function to compute cosine similarity without scikit-learn (using NumPy)
@@ -95,6 +91,7 @@ def call_chatgpt_api(prompt):
             temperature= 1 # 0.75
         )
         answer = response.choices[0].message.content
+        print(response)
         return answer
     except Exception as e:
         print(f"Error calling ChatGPT: {e}")
@@ -176,7 +173,6 @@ def add_faq():
 def query_faq():
     data = request.get_json()
     description = data.get('description')
-   # print(f"Description : {description}")
    
     #regenerate_invalid_embeddings()
     
@@ -204,7 +200,7 @@ def query_faq():
     # 4. If no FAQ matches, create a prompt for ChatGPT
     bot_context = []
     faq_context = "\n".join([f"Q: {faq['question']}\nA: {faq['answer']}" for faq in faq_data])
-    faq_context = "You are Student AI Helpdesk bot \n If you do not know answer **politely** say you do not know in friendly manner. \n An AI-integrated student grievance system using Raspberry Pi represents a significant advancement in how educational institutions handle student complaints. By leveraging the power of AI for automation and analysis, combined with the affordability and flexibility of the Raspberry Pi, institutions can provide a more efficient, transparent, and responsive grievance handling process. This not only enhances student satisfaction but also helps institutions maintain a supportive and well-managed educational environment. \n **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE SHOULD BE AVOIDED AT AL **```" + faq_context + "```"
+    faq_context = "You are Student AI Helpdesk bot \n If you do not know answer **politely** say you do not know in friendly manner. \n An AI-integrated student grievance system using Raspberry Pi represents a significant advancement in how educational institutions handle student complaints. By leveraging the power of AI for automation and analysis, combined with the affordability and flexibility of the Raspberry Pi, institutions can provide a more efficient, transparent, and responsive grievance handling process. This not only enhances student satisfaction but also helps institutions maintain a supportive and well-managed educational environment. \n **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE SHOULD BE AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. **```" + faq_context + "```"
     bot_context.append({'role': 'system', 'content': f"{faq_context}"})
     bot_context.append({'role': 'user', 'content': f"{description}"})
     

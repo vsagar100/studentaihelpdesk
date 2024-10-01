@@ -15,6 +15,7 @@ class User(db.Model):
     email = db.Column(db.String(100), unique=True, nullable=False)
     role = db.Column(db.String(50), nullable=False)
     department = db.Column(db.String(100))  # Optional field
+    file_path = db.Column(db.String(100))
     created_by = db.Column(db.String(100))
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     modified_by = db.Column(db.String(100))

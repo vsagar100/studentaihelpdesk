@@ -31,7 +31,7 @@ def create_app():
     def test():
         return jsonify({"status": "success", "message": "The server is running correctly!"})
     
-    @app.route('/uploads/<filename>')
+    @app.route('/uploads/<path:filename>')
     def uploaded_file(filename):
         return send_from_directory(os.path.join(app.root_path, './uploads'), filename)
 
