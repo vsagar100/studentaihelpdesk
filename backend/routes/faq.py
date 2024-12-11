@@ -1,6 +1,6 @@
 import os
 from openai import OpenAI
-from flask import Flask, request, jsonify, current_app, Blueprint
+from flask import Flask, request, jsonify, json, current_app, Blueprint
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import or_
@@ -139,23 +139,18 @@ def regenerate_invalid_embeddings():
 @faq_bp.route('/add', methods=['POST'])
 def add_faq():
       try:
-        update_faq_embeddings()
     
-        print(f"\n FAQ updated successfully...")
-        return jsonify({"answer": "Updated successfully"}), 200
-        
-        return
-        question = request.form['question']
-        answer = request.form['answer']
-        keywords = request.form['keywords']
+        question = request.form.get('question')
+        answer = request.form.get('answer')
+        keywords = request.form.get('keywords')
         print(f"Question: {question}")
         # Create the embedding for the question
-        response = client.embeddings.create(input=question, model="text-embedding-ada-002")
+        response = client.embeddings.create(input=question + "\n" + keywords, model="text-embedding-ada-002")
         embedding_vector = response.data[0].embedding
         
         # Create a new FAQ entry
-        faq = FAQ(question=question, answer=answer, keywords=keywords)
-        faq.set_embedding(embedding_vector)
+        faq = FAQ(question=question, answer=answer, keywords=keywords, embedding=json.dumps(embedding_vector))
+        #faq.set_embedding(embedding_vector)
         
         # Save to the database
         db.session.add(faq)
@@ -164,15 +159,79 @@ def add_faq():
         update_faq_embeddings()
     
         print(f"\n FAQ added successfully...")
+        return jsonify({"status": "success", "message": "FAQ added successfully"}), 200
       
       except Exception as e:
         print(e)
         return jsonify({"error": str(e)}), 500
 
+@faq_bp.route('/update/<int:faq_id>', methods=['POST'])
+def update_faq(faq_id):
+      try:        
+        
+        #update_faq_embeddings()
+        print("INside update")
+        
+        #faq_id = faq_id']
+        question = request.form.get('question')
+        answer = request.form.get('answer')
+        keywords = request.form.get('keywords')
+        print(f"Question: {question}")
+        # Create the embedding for the question
+        response = client.embeddings.create(input=question+ "\n" + keywords, model="text-embedding-ada-002")
+        embedding_vector = response.data[0].embedding
+        
+        # update FAQ entry
+        faq = FAQ.query.get(faq_id)
+        if not faq:
+          return jsonify({"status": "error", "message": "FAQ not found, FAQ not updated."}), 404 
+              
+        #faq = FAQ(faq_id=faq_id, question=question, answer=answer, keywords=keywords)
+        faq.question = question
+        faq.answer = answer
+        faq.keyword = keywords
+        #faq.embedding = embedding_vector 
+        faq.set_embedding(embedding_vector)
+        
+        # Save to the database
+        db.session.commit()
+        
+        #update_faq_embeddings()
+    
+        print(f"\n FAQ added successfully...")
+        return jsonify({"status": "success", "message": "FAQ updated successfully"}), 200
+      
+      except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
+
+@faq_bp.route('/delete/<int:faq_id>', methods=['DELETE'])
+def delete_faq(faq_id):
+    try:
+        # Find the FAQ record to delete
+        print("INside delete")
+        faq = FAQ.query.filter_by(faq_id=faq_id).first()
+        if not faq:
+            return jsonify({'status': 'error', 'message': 'FAQ not found'}), 404
+        print(faq)
+        # Delete the FAQ record
+        db.session.delete(faq)
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'message': 'FAQ deleted successfully'}), 200
+
+    except SQLAlchemyError as e:
+        db.session.rollback()  # Rollback in case of a database error
+        return jsonify({'status': 'error', 'message': f'Database error: {str(e)}'}), 500
+
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': f'Unexpected error: {str(e)}'}), 500
+
 @faq_bp.route('/query', methods=['POST'])
 def query_faq():
     data = request.get_json()
-    description = data.get('description')
+    print(data)
+    description = data.get('query')
    
     #regenerate_invalid_embeddings()
     
@@ -190,28 +249,53 @@ def query_faq():
     # 3. Search for the best matching FAQ based on cosine similarity
     faq_answer, similarity = search_faq(query_embedding, faq_data)
     
-    
-    if faq_answer:
-        print(f"FAQ Answer: {faq_answer}")
-        print(similarity)
-        # If a matching FAQ is found with high similarity, return the FAQ answer
-        return jsonify({"answer": faq_answer}), 200
-
-    # 4. If no FAQ matches, create a prompt for ChatGPT
+     # 4. If no FAQ matches, create a prompt for ChatGPT
     bot_context = []
-    faq_context = "\n".join([f"Q: {faq['question']}\nA: {faq['answer']}" for faq in faq_data])
-    faq_context = "You are Student AI Helpdesk bot \n If you do not know answer **politely** say you do not know in friendly manner. \n An AI-integrated student grievance system using Raspberry Pi represents a significant advancement in how educational institutions handle student complaints. By leveraging the power of AI for automation and analysis, combined with the affordability and flexibility of the Raspberry Pi, institutions can provide a more efficient, transparent, and responsive grievance handling process. This not only enhances student satisfaction but also helps institutions maintain a supportive and well-managed educational environment. \n **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE SHOULD BE AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. **```" + faq_context + "```"
-    bot_context.append({'role': 'system', 'content': f"{faq_context}"})
-    bot_context.append({'role': 'user', 'content': f"{description}"})
-    
+        
+    if faq_answer:
+      print(f"FAQ Answer: {faq_answer}")
+      print(similarity)
+      bot_context.append({'role': 'system', 'content': f"You are Student AI Helpdesk bot. **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE, POLITICAL OPIONION SHOULD BE STRICTLY AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. ** \n FAQ answer to be formatted in well english: {faq_answer}\n"})
+      bot_context.append({'role': 'user', 'content': f"User Query:{description}  \n "})
+        # If a matching FAQ is found with high similarity, return the FAQ answer
+        #return jsonify({"response": faq_answer}), 200
+
+    else:  
+      faq_context = "\n".join([f"Q: {faq['question']}\nA: {faq['answer']}" for faq in faq_data])
+      faq_context = "You are Student AI Helpdesk bot \n If answer is not in FAQ but based on FAQ you can think answer if question is **NOT** specific to something, do not mention you are referring to FAQs while answering. Given below are FAQs, you can refer to them while answering. \n **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE, POLITICAL OPIONION SHOULD BE STRICTLY AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. **FAQs: ```" + faq_context + "```"
+
+      bot_context.append({'role': 'system', 'content': f"{faq_context}"})    
+      bot_context.append({'role': 'user', 'content': f"{description}"})
+      
     print(description)
     # 5. Fallback to ChatGPT
     answer = call_chatgpt_api(bot_context)
 
     if answer:
-        return jsonify({"answer": answer}), 200
+        return jsonify({"response": answer}), 200
     else:
         return jsonify({"error": "Could not generate a response"}), 500
+
+@faq_bp.route('/get_all', methods=['GET'])
+def get_all_faqs():
+    try:
+      faqs = FAQ.query.all()
+      #faq_data = [{"question": faq.question, "answer": faq.answer, "embedding": faq.embedding} for faq in faqs]
+      
+      faq_data = [
+        {
+          "faq_id": faq.faq_id,
+          "question": faq.question,
+          "answer": faq.answer,
+          "keywords": faq.keywords
+        }
+        for faq in faqs
+      ]
+      return jsonify(faq_data), 200
+      
+    except Exception as e:
+        print(e)
+        return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)

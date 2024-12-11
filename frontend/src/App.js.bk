@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 import StudentDashboard from './components/StudentDashboard';
-import AdminUserManagement from './components/AdminUserManagement';
+import StaffDashboard from './components/StaffDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import StudentHelpdesk from './components/StudentHelpdesk';
 import AddFAQ from './components/AddFAQ';
@@ -24,42 +24,38 @@ function App() {
   const [userProfilePic, setUserProfilePic] = useState('');
 
   const isDashboardRoute = location.pathname.includes('/admin/dashboard');
-  const noAuthRoutes = ['/','/adminsignin', '/signup', '/chat', '/test'];
+  const noAuthRoutes = ['/adminsignin', '/signup', '/chat', '/test'];
 
   return (
     <UserProvider>
-     <div className={`app-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
-        {!noAuthRoutes.includes(location.pathname) ? (
-          <>         
+      {isDashboardRoute ? (
+        <div className="app-container">
+          
+          <div className="main-content-wrapper">
             <Sidebar
               isSidebarOpen={isSidebarOpen}              
             />
              <div className="main-area">             
                  <Header />
                  <div className="main-content">
-                    <Routes>
-                      <Route 
-                        path="/admin/dashboard" 
-                        element={
-                          <ProtectedRoute>
-                            <AdminDashboard />
-                          </ProtectedRoute>
-                        } 
-                      />
-                      <Route 
-                        path="/admin/usermgmt" 
-                        element={
-                          <ProtectedRoute>
-                            <AdminUserManagement />
-                          </ProtectedRoute>
-                        } 
-                      />
-                    </Routes>
+                <Routes>
+                  <Route 
+                    path="/admin/dashboard" 
+                    element={
+                      <ProtectedRoute>
+                        <AdminDashboard />
+                      </ProtectedRoute>
+                    } 
+                  />
+                </Routes>
                 <Footer />
-             </div>                
-            </div>
-          </>
-          
+                
+             </div>
+                 
+             </div>
+          </div>
+         
+        </div>
       ) : (
         <Routes>
           <Route path="/adminsignin" element={<SignIn />} />
@@ -67,7 +63,6 @@ function App() {
           <Route path="/" element={<Navigate to="/chat" replace />} />
         </Routes>
       )}
-     </div>
     </UserProvider>
   );
 }

@@ -1,57 +1,77 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect, createContext } from 'react';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { GlobalContext } from '../GlobalState';
 import '../styles/SignIn.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from './UserContext';
+import Modal from './Modal';
+import SigninImage from '../assets/images/bg-02.png';
 
 const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
   const { BACKEND_API_URL } = useContext(GlobalContext);
-  const [role, setRole] = useState('student');
-  const [email, setEmail] = useState('');
+  const [showUserModal, setShowUserModal] = useState(false);
+ // const [role, setRole] = useState('student');
+  const [uname, setUName] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+  const { setUser, user } = useContext(UserContext); // Access the context
 
+ // useEffect(() => {
+    
+//  }, []);
+
+  // Log user when it gets updated
   useEffect(() => {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
     if (rememberedEmail) {
-      setEmail(rememberedEmail);
+      setUName(rememberedEmail);
       setRememberMe(true);
     }
-  }, []);
-
-  const handleRoleChange = (newRole) => {
-    setRole(newRole.toLowerCase());
-    if (onRoleChange) onRoleChange(newRole.toLowerCase());
+    if (user) {
+      console.log('User updated in Context:', user);  // This will log when user state updates
+    }
+  }, [user]);
+  
+  const handleHomeClick = async (e) => {
+    return <Navigate to="/" replace />;
+  
+  }
+  
+  const handleOpenUserModal = () => {
+    setShowUserModal(true);
   };
 
+  const handleCloseUserModal = () => {
+    setShowUserModal(false);
+  };
+
+
   const handleSignIn = async (e) => {
-    e.preventDefault();
+     e.preventDefault();
     try {
       const response = await fetch(`${BACKEND_API_URL}/api/auth/signin`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ uname, password }),
       });
 
       const data = await response.json();
+      console.log(data);
       if (data.status === 'success') {
-        const userRole = data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1);
-        onRoleChange(userRole);
-        onUserDetailsChange(data.user.username, data.user.file_path != null ? data.user.file_path : '');
+        // Set user in UserContext
+       // setUser({
+       //   username: data.user.username
+       // });
+        setUser(data.user);
+
+        // Store token in localStorage (if needed for future requests)
         localStorage.setItem('token', data.token);
-        localStorage.setItem('userRole', userRole);
-        localStorage.setItem('userName', data.user.username);
-        localStorage.setItem('userProfilePic', data.user.file_path != null ? data.user.file_path : '');
 
-        if (rememberMe) {
-          localStorage.setItem('rememberedEmail', email);
-        } else {
-          localStorage.removeItem('rememberedEmail');
-        }
-
-        navigate(`/${userRole.toLowerCase()}/dashboard`);
+        // Navigate to dashboard
+        //const userRole = data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1);
+        navigate('/admin/dashboard');
       } else {
         alert(data.message);
       }
@@ -60,80 +80,147 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
       alert('An error occurred. Please try again.');
     }
   };
+  
+
+  const handleForgotUser = async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);   
+    //const question = formData.get('question');
+    //const keywords = formData.get('keywords');
+    //const answer = formData.get('answer');
+ 
+    
+    try {      
+      
+        // Edit existing User
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BACKEND_API_URL}/api/auth/user/resetpwd`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            //'Content-Type': 'application/json',
+          },
+          body: formData,
+        });
+
+        if (response.ok) {
+          console.log('User updated successfully');
+           alert('Password reset successfully');
+          handleCloseUserModal(); // Close modal after saving
+        } else {
+          console.error('Failed to update user credentials.');
+          console.log(response);
+          alert("Error occured, contact admin. "+formData.get('username') + " "+ response.statusText);
+        }
+       
+    } catch (err) {
+      console.log(err);
+      console.error('Error saving User:', err);
+      alert(err);
+    }
+  };
 
   return (
-    <div className="signin-container">
-      <h1 className="main-heading">Grievance System</h1>
-      <h2 className="sub-heading">Sign In</h2>
-      {/*
-      <div className="role-selection">
-        <button
-          className={`role-button ${role === 'admin' ? 'active' : ''}`}
-          onClick={() => handleRoleChange('admin')}
-        >
-          Admin
-        </button>
-        <button
-          className={`role-button ${role === 'student' ? 'active' : ''}`}
-          onClick={() => handleRoleChange('student')}
-        >
-          Student
-        </button>
-        <button
-          className={`role-button ${role === 'staff' ? 'active' : ''}`}
-          onClick={() => handleRoleChange('staff')}
-        >
-          Staff
-        </button>
-      </div>
-      */}
-      <form onSubmit={handleSignIn}>
-        <div className="form-group">
-          <div className="input-wrapper">
-            <FontAwesomeIcon icon={faUser} className="input-icon" />
-            <input
-              type="email"
-              className="form-control"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+    <div className="signup-container">
+      <div className="signin-left">
+        <img src={SigninImage} alt="Signin Background" className="signin-image" />
+      </div>      
+      <div className="signin-right">
+        <h1 className="main-heading">AI StudyPal</h1>
+        <h2 className="sub-heading">Admin Sign In</h2>
+        <form onSubmit={handleSignIn}>
+          <div className="form-group">
+            <div className="input-wrapper">
+              <FontAwesomeIcon icon={faUser} className="input-icon" />
+              <input
+                type="text"
+                className="form-control"
+                placeholder="User name"
+                value={uname}
+                onChange={(e) => setUName(e.target.value)}
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div className="form-group">
-          <div className="input-wrapper">
-            <FontAwesomeIcon icon={faLock} className="input-icon" />
-            <input
-              type="password"
-              className="form-control"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <div className="form-group">
+            <div className="input-wrapper">
+              <FontAwesomeIcon icon={faLock} className="input-icon" />
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
           </div>
-        </div>
-        <div className="form-options">
-          <label>
-            <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
+          <div className="form-options">
+            <label>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+              />
+              Remember me
+            </label>
+            <a href="#" onClick={() => handleOpenUserModal() } className="forgot-password">
+              Forgot Password?
+            </a>
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Sign In
+          </button>
+          <button type="button" onClick={handleHomeClick} className="btn role-button">
+            Home
+          </button>
+        </form>
+        
+        {/* USer Modal */}
+      <Modal show={showUserModal} handleClose={handleCloseUserModal} title="Forgot Password">
+        <form onSubmit={handleForgotUser}>
+          <div className="form-group">
+            <label htmlFor="username">UserName:</label>
+            <input type="text" id="username" name="username" className="form-control" required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="hint">Password Hint:</label>
+            <input type="text" id="hint" name="hint" className="form-control" required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">New Password:</label>
+            <input type="password" id="password" name="password" className="form-control" required 
+            minLength={8}
+            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+            title="Password must be at least 8 characters long, contain a letter, a number, and a special character"
+             />
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirmPassword">Confirm New Password:</label>
+            <input 
+              type="password" 
+              id="confirmPassword" 
+              name="confirmPassword" 
+              className="form-control" 
+              required 
+              onBlur={(e) => {
+                const password = document.getElementById('password').value;
+                const confirmPassword = e.target.value;
+                console.log(password);
+                console.log(confirmPassword);
+                if (password != confirmPassword) {
+                  e.target.setCustomValidity("Passwords do not match");
+                } else {
+                  e.target.setCustomValidity("");
+                }
+              }}
             />
-            Remember me
-          </label>
-          <a href="#" className="forgot-password">
-            Forgot Password?
-          </a>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Sign In
-        </button>
-      </form>
-
-      <div className="sign-up">
-        <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+            </div>
+          
+          <button type="submit" className="btn btn-primary">Save User</button>
+        </form>
+      </Modal>
       </div>
     </div>
   );

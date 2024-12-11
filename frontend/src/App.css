@@ -25,7 +25,7 @@
 
 .main-area {
   flex-grow: 1;
-  margin-left: 250px; /* Default margin to accommodate the sidebar */
+  margin-left: 150px; /* Default margin to accommodate the sidebar */
   transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
 }
 
@@ -34,8 +34,8 @@
 }
 
 .main-content {
-  padding: 20px; /* Padding inside the main content for spacing */
-  margin-top: 20px; /* Top margin to avoid overlap with header */
+  padding: 0px; /* Padding inside the main content for spacing */
+  margin-top: 0px; /* Top margin to avoid overlap with header */
 }
 
 .footer {

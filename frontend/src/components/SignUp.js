@@ -30,7 +30,7 @@ const SignUp = () => {
       try {
         const data = new FormData();
         data.append('fullName', formData.fullName);
-        data.append('email', formData.email);
+        data.append('password_hint', formData.email);
         data.append('mobile', formData.mobile);
         data.append('password', formData.password);
         data.append('role', 'student');// Hardcoded role as student

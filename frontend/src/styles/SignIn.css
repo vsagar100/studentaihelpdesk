@@ -8,6 +8,39 @@ body, html {
   align-items: center;
 }
 
+signup-container {
+  display: flex;
+  width: 100%; /* Full width of parent container */
+  height: 100vh; /* Full viewport height */
+}
+
+.signin-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #007bff; /* Fallback color */
+}
+
+.signin-left img {
+  width: 100% !important;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the left section */
+}
+
+.signup-right { 
+  
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the start (top) */
+  background-color: #ffffff;
+  padding: 40px 20px !important; /* Added top padding to ensure heading is visible */
+  max-height: 100vh; /* Prevents content from overflowing the viewport */
+  overflow-y: auto; /* Adds vertical scrollbar if content exceeds container height */
+}
+
 .signin-container {
   max-width: 400px;
   width: 100%;
@@ -44,6 +77,7 @@ body, html {
   color: #333;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
+  width: 100%;
 }
 
 .role-button.active {
@@ -76,7 +110,7 @@ body, html {
 
 .form-control {
   width: 100%;
-  padding: 10px 40px !important; /* Added more padding to avoid overlap with icon */
+  padding: 10px 10px 10px 40px !important; /* Added more padding to avoid overlap with icon */
   margin-top: 5px;
   border-radius: 30px;
   border: 1px solid #ccc;

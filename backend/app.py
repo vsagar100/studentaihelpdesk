@@ -21,11 +21,12 @@ def create_app():
     jwt.init_app(app)
     #CORS(app)
     print( app.config.get('FRONTEND_URL'))
-    #CORS(app, resources={r"/*": {"origins":  app.config.get('FRONTEND_URL')}},
+    
+    CORS(app, resources={r"/api/*": {"origins": app.config['FRONTEND_URL']}})
+    #CORS(app, resources={r"/*": {"origins":  app.config.get('FRONTEND_URL')}})
     #supports_credentials=True, 
     #methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    #allow_headers=["Authorization", "Content-Type"])
-
+    #allow_headers=["Authorization", "Content-Type"]
     
     @app.route('/api/test', methods=['GET'])
     def test():
@@ -45,6 +46,11 @@ def create_app():
         # Import the blueprint inside the function
         from routes.faq import faq_bp
         app.register_blueprint(faq_bp, url_prefix='/api/faq')
+    
+    with app.app_context():
+        # Import the blueprint inside the function
+        from routes.announcements import announcements_bp
+        app.register_blueprint(announcements_bp, url_prefix='/api/announcements')
     
     with app.app_context():
         # Import the blueprint inside the function
