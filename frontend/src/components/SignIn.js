@@ -35,7 +35,7 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
   }, [user]);
   
   const handleHomeClick = async (e) => {
-    return <Navigate to="/" replace />;
+    navigate('/');
   
   }
   

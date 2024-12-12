@@ -8,10 +8,10 @@ from models import db, FAQ
 import numpy as np  # NumPy for vector operations
 
 faq_bp = Blueprint('faq', __name__)
-client = OpenAI()
+client = OpenAI(api_key = current_app.config['OPENAI_API_KEY'])
 
 # Load environment variables, set up OpenAI API key
-client.api_key = current_app.config['OPENAI_API_KEY']
+#client.api_key = current_app.config['OPENAI_API_KEY']
 api_url = current_app.config['OPENAI_API_URL']
 gpt_model = current_app.config['GPT_MODEL']
 

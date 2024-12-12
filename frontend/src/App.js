@@ -3,14 +3,11 @@ import { Routes, Route, useLocation, Navigate, useNavigate } from 'react-router-
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
-import StudentDashboard from './components/StudentDashboard';
+
 import AdminUserManagement from './components/AdminUserManagement';
 import AdminDashboard from './components/AdminDashboard';
 import StudentHelpdesk from './components/StudentHelpdesk';
-import AddFAQ from './components/AddFAQ';
 import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Test from './components/Test';
 import { SidebarContext } from './contexts/SidebarContext';
 import './App.css';
 import { UserProvider } from './components/UserContext';

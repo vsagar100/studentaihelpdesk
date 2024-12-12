@@ -47,26 +47,6 @@ def create_app():
         from routes.faq import faq_bp
         app.register_blueprint(faq_bp, url_prefix='/api/faq')
     
-    with app.app_context():
-        # Import the blueprint inside the function
-        from routes.announcements import announcements_bp
-        app.register_blueprint(announcements_bp, url_prefix='/api/announcements')
-    
-    with app.app_context():
-        # Import the blueprint inside the function
-        from routes.submit_grievance import submit_grievance_bp
-        app.register_blueprint(submit_grievance_bp, url_prefix='/api/grievance')
-
-    with app.app_context():
-        # Import the blueprint inside the function
-        from routes.get_grievances import get_grievances_bp
-        app.register_blueprint(get_grievances_bp, url_prefix='/api/grievances')
-    print("test")
-    with app.app_context():
-        # Import the blueprint inside the function
-        from routes.get_grievances import get_grievanceupdates_bp
-        app.register_blueprint(get_grievanceupdates_bp, url_prefix='/api/grievanceupdates')
-
     @app.after_request
     def after_request(response):
       response.headers.add('Access-Control-Allow-Origin', app.config['FRONTEND_URL'])
