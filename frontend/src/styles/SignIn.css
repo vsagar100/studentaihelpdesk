@@ -8,10 +8,11 @@ body, html {
   align-items: center;
 }
 
-signup-container {
+.signup-container {
   display: flex;
-  width: 100%; /* Full width of parent container */
-  height: 100vh; /* Full viewport height */
+  width: 100%;
+  height: 100vh;
+  flex-direction: row;
 }
 
 .signin-left {
@@ -19,26 +20,23 @@ signup-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #007bff; /* Fallback color */
+  background-color: #007bff;
 }
 
 .signin-left img {
-  width: 100% !important;
+  width: 100%;
   height: 100%;
-  object-fit: cover; /* Ensures the image covers the left section */
+  object-fit: cover;
 }
 
-.signup-right { 
-  
+.signin-right {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content to the start (top) */
+  justify-content: center;
   background-color: #ffffff;
-  padding: 40px 20px !important; /* Added top padding to ensure heading is visible */
-  max-height: 100vh; /* Prevents content from overflowing the viewport */
-  overflow-y: auto; /* Adds vertical scrollbar if content exceeds container height */
+  padding: 40px;
 }
 
 .signin-container {
@@ -49,6 +47,25 @@ signup-container {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .signup-container {
+    flex-direction: column;
+  }
+
+  .signin-left {
+    height: 300px;
+  }
+
+  .signin-right {
+    padding: 20px;
+  }
+
+  .signin-container {
+    padding: 20px;
+    max-width: 90%;
+  }
 }
 
 .main-heading {
@@ -168,9 +185,3 @@ signup-container {
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
-  .signin-container {
-    padding: 20px;
-    max-width: 90%;
-  }
-}
