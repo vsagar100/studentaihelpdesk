@@ -12,17 +12,8 @@ class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    email = db.Column(db.String(100), unique=True, nullable=False)
-    role = db.Column(db.String(50), nullable=False)
-    department = db.Column(db.String(100))  # Optional field
-    file_path = db.Column(db.String(100))
-    created_by = db.Column(db.String(100))
-    created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
-    modified_by = db.Column(db.String(100))
-    modified_date = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-    
-    current_workload = db.Column(db.Integer, default=0)
-
+    hint = db.Column(db.String(100), unique=True, nullable=False)
+        
     # Hash the password before storing it in the database
     def set_password(self, password):
         self.password = generate_password_hash(password).decode('utf-8')
@@ -30,6 +21,24 @@ class User(db.Model):
     # Check if the provided password matches the hashed password
     def check_password(self, password):
         return check_password_hash(self.password, password)
+
+class AdminUser(db.Model):
+    __tablename__ = 'admin_users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    password_hint = db.Column(db.String(100), unique=True, nullable=False)
+    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
+    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+    
+    # Hash the password before storing it in the database
+    def set_password(self, password_hash):
+        self.password_hash = generate_password_hash(password_hash).decode('utf-8')
+
+    # Check if the provided password matches the hashed password
+    def check_password(self, password_hash):
+        return check_password_hash(self.password_hash, password_hash)
+
 
 # FAQ model
 class FAQ(db.Model):
@@ -39,6 +48,12 @@ class FAQ(db.Model):
     keywords = db.Column(db.Text, nullable=False)  # Keywords for matching
     answer = db.Column(db.Text, nullable=False)
     embedding = db.Column(db.Text, nullable=True)
+    
+    def __init__(self, question, keywords, answer, embedding):
+      self.question = question
+      self.keywords = keywords
+      self.answer = answer
+      self.embedding = embedding
     
     def set_embedding(self, embedding_vector):
         # Convert embedding list to JSON string
@@ -104,6 +119,18 @@ class Notification(db.Model):
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     modified_by = db.Column(db.String(100), nullable=False)
     modified_date = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
+class Announcement(db.Model):
+    __tablename__ = 'announcements'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    category = db.Column(db.String(100), nullable=False)
+    is_expired = db.Column(db.Boolean, default=False)
+    file_path = db.Column(db.String(255), nullable=True)
+    created_by = db.Column(db.Integer, nullable=False)  # ID of the admin user
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+    modified_at = db.Column(db.DateTime, onupdate=datetime.datetime.now)
     
     
         

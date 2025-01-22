@@ -1,214 +1,220 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../GlobalState';
+import FeedbackModal from './FeedbackModal';
 import Modal from './Modal'; // Import the Modal component
 import '../styles/AdminDashboard.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from './UserContext';
 
 const AdminDashboard = () => {
-  const [showUserModal, setShowUserModal] = useState(false);
-  const [showGrievanceModal, setShowGrievanceModal] = useState(false);
-  const [selectedGrievance, setSelectedGrievance] = useState(null);
-  const [users, setUsers] = useState([]);
-  const [tasks, setTasks] = useState([]);
-  const [grievances, setGrievances] = useState([]);
+  const { BACKEND_API_URL } = useContext(GlobalContext);
+  const [showFAQModal, setShowFAQModal] = useState(false);
+  const [selectedFAQ, setSelectedFAQ] = useState(null);  
+  const [faqs, setFAQs] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 5;
 
-  useEffect(() => {
-    const fetchDashboardData = () => {
-      // Dummy data for users, tasks, and grievances
-      const dummyUsers = [
-        { id: 1, name: 'John Doe', role: 'Student', email: 'john.doe@example.com' },
-        { id: 2, name: 'Jane Smith', role: 'Staff', email: 'jane.smith@example.com' }
-      ];
-      const dummyTasks = [
-        { id: 1, description: 'Review new student grievances', status: 'Pending' },
-        { id: 2, description: 'Approve faculty requests', status: 'In Progress' }
-      ];
-      const dummyGrievances = [
-        { id: 1, category: 'Academic', description: 'Issue with syllabus', status: 'Resolved' },
-        { id: 2, category: 'Facilities', description: 'Maintenance required in library', status: 'Pending' }
-      ];
+  // Fetch FAQs from the backend API
+  const fetchFAQs = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`${BACKEND_API_URL}/api/faq/get_all`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
-      setUsers(dummyUsers);
-      setTasks(dummyTasks);
-      setGrievances(dummyGrievances);
-    };
-
-    fetchDashboardData();
-  }, []);
-
-  const handleOpenUserModal = () => setShowUserModal(true);
-  const handleCloseUserModal = () => setShowUserModal(false);
-
-  const handleOpenGrievanceModal = (grievance) => {
-    setSelectedGrievance(grievance);
-    setShowGrievanceModal(true);
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setFAQs(data);
+      } else {
+        setFAQs([]);
+      }
+    } catch (err) {
+      console.error('Error fetching FAQs:', err);
+    }
   };
 
-  const handleCloseGrievanceModal = () => {
-    setShowGrievanceModal(false);
-    setSelectedGrievance(null);
+  useEffect(() => {
+    fetchFAQs();
+  }, []);
+
+  const handleOpenFAQModal = (faq) => {
+    setSelectedFAQ(faq);
+    setShowFAQModal(true);
+  };
+
+  const handleCloseFAQModal = () => {
+    setShowFAQModal(false);
+    setSelectedFAQ(null);
+  };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const currentRecords = faqs.slice((currentPage - 1) * recordsPerPage, currentPage * recordsPerPage);
+
+  const handleDeleteFAQ = async (faqId) => {
+    if (window.confirm('Are you sure you want to delete this FAQ?')) {
+      // Call API to delete FAQ
+      console.log(`Deleting FAQ with ID: ${faqId}`);
+      
+      try {
+      if (faqId) {
+        // Edit existing FAQ
+        console.log("Inside If");
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BACKEND_API_URL}/api/faq/delete/${faqId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            //'Content-Type': 'application/json',
+          }
+        });
+
+        if (response.ok) {
+          console.log('FAQ deleted successfully');
+          await fetchFAQs(); // Refresh the FAQ list
+        } else {
+          console.error('Failed to delete FAQ');
+        }
+      }
+      } catch (err) {
+        console.log(err);
+        console.error('Error deleting FAQ:', err);
+        alert('Error deleting FAQ. Please try again.');
+      }
+    }
+  };
+
+  // Handle Save Button Click for both Add and Edit Scenarios
+  const handleSaveFAQ = async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.target);   
+    //const question = formData.get('question');
+    //const keywords = formData.get('keywords');
+    //const answer = formData.get('answer');
+ 
+    
+    try {      
+      if (selectedFAQ) {
+        console.log(selectedFAQ);
+        // Edit existing FAQ
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BACKEND_API_URL}/api/faq/update/${selectedFAQ.faq_id}`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            //'Content-Type': 'application/json',
+          },
+          body: formData,
+        });
+
+        if (response.ok) {
+          console.log('FAQ updated successfully');
+          await fetchFAQs(); // Refresh the FAQ list
+          handleCloseFAQModal(); // Close modal after saving
+        } else {
+          console.error('Failed to update FAQ');
+        }
+      } else {
+        // Add new FAQ
+        console.log(formData.get('question'));
+        const response = await fetch(`${BACKEND_API_URL}/api/faq/add`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+           // 'Content-Type': 'application/json',
+          },
+          body: formData,
+        });
+
+        if (response.ok) {
+          console.log('FAQ added successfully');
+          await fetchFAQs(); // Refresh the FAQ list
+          handleCloseFAQModal(); // Close modal after saving
+        } else {
+          console.error('Failed to add FAQ');
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      console.error('Error saving FAQ:', err);
+      alert('Error saving FAQ. Please try again.');
+    }
   };
 
   return (
     <div className="admin-dashboard-container">
-      {/* Header with statistics */}
-      <div className="header-stats">
-        <div className="stat-card">
-          <h3>Total Students</h3>
-          <p>200</p>
-        </div>
-        <div className="stat-card">
-          <h3>Total Staff</h3>
-          <p>50</p>
-        </div>
-        <div className="stat-card">
-          <h3>Total Grievances</h3>
-          <p>75</p>
-        </div>
-        <div className="stat-card">
-          <h3>Pending Tasks</h3>
-          <p>10</p>
-        </div>
-      </div>
-
       {/* Main Content */}
       <div className="main-content">
-        {/* Grievance Management Section */}
+        {/* FAQ Management Section */}
         <div className="grievance-section">
-          <h3>Recent Grievances</h3>
+          <div className="good-job-tile">
+            <h3>FAQs</h3>
+          </div>
+          <button className="btn btn-primary" onClick={() => handleOpenFAQModal()}>
+            Add FAQ
+          </button>
           <table className="grievance-table">
             <thead>
               <tr>
-                <th>Grievance ID</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Status</th>
+                <th>FAQ ID</th>
+                <th>Question</th>
+                <th>Keywords</th>
+                <th>Answer</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              {grievances.map((grievance) => (
-                <tr key={grievance.id}>
-                  <td>{grievance.id}</td>
-                  <td>{grievance.category}</td>
-                  {/* Make Description clickable */}
-                  <td>
-                    <a href="#" onClick={() => handleOpenGrievanceModal(grievance)}>
-                      {grievance.description}
-                    </a>
-                  </td>
-                  {/* Make Status clickable */}
-                  <td>
-                    <a href="#" onClick={() => handleOpenGrievanceModal(grievance)}>
-                      {grievance.status}
-                    </a>
-                  </td>
+              {currentRecords && currentRecords.map((faq) => (
+                <tr key={faq.faq_id}>
+                  <td>{faq.faq_id}</td>
+                  <td>{faq.question}</td>
+                  <td>{faq.keywords}</td>
+                  <td>{faq.answer}</td>
+                  <td><button onClick={() => handleOpenFAQModal(faq)} className="status-button">
+                    Edit
+                  </button></td>
+                  <td><button onClick={() => handleDeleteFAQ(faq.faq_id)} className="status-button">
+                    Delete
+                  </button></td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
 
-        {/* User Management Section */}
-        <div className="user-management-section">
-          <h3>User Management</h3>
-          <button className="btn btn-primary" onClick={handleOpenUserModal}>
-            Add User
-          </button>
-          <table className="user-table">
-            <thead>
-              <tr>
-                <th>User ID</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.role}</td>
-                  <td>{user.email}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Task Management Section */}
-        <div className="task-section">
-          <h3>Task Management</h3>
-          <table className="task-table">
-            <thead>
-              <tr>
-                <th>Task ID</th>
-                <th>Description</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              {tasks.map((task) => (
-                <tr key={task.id}>
-                  <td>{task.id}</td>
-                  <td>{task.description}</td>
-                  <td>{task.status}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="pagination">
+            {[...Array(Math.ceil(faqs.length / recordsPerPage)).keys()].map((number) => (
+              <button key={number} onClick={() => paginate(number + 1)}
+                className={currentPage === number + 1 ? 'active' : ''}>
+                {number + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Grievance Modal */}
-      {selectedGrievance && (
-        <Modal show={showGrievanceModal} handleClose={handleCloseGrievanceModal} title="Manage Grievance">
-          <form>
-            <div className="form-group">
-              <label htmlFor="category">Category:</label>
-              <input type="text" id="category" className="form-control" defaultValue={selectedGrievance.category} readOnly />
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Description:</label>
-              <textarea
-                id="description"
-                className="form-control"
-                rows="4"
-                defaultValue={selectedGrievance.description}
-              ></textarea>
-            </div>
-            <div className="form-group">
-              <label htmlFor="status">Update Status:</label>
-              <select id="status" className="form-control" defaultValue={selectedGrievance.status}>
-                <option value="Pending">Pending</option>
-                <option value="In Progress">In Progress</option>
-                <option value="Resolved">Resolved</option>
-              </select>
-            </div>
-            <button type="submit" className="btn btn-primary">Update</button>
-          </form>
-        </Modal>
-      )}
-
-      {/* User Modal */}
-      <Modal show={showUserModal} handleClose={handleCloseUserModal} title="Add User">
-        <form>
+      {/* FAQ Modal */}
+      <Modal show={showFAQModal} handleClose={handleCloseFAQModal} title={selectedFAQ ? "Edit FAQ" : "Add FAQ"}>
+        <form onSubmit={handleSaveFAQ}>
           <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input type="text" id="name" className="form-control" />
+            <label htmlFor="question">Question:</label>
+            <input type="text" id="question" name="question" defaultValue={selectedFAQ ? selectedFAQ.question : ""} className="form-control" required />
           </div>
           <div className="form-group">
-            <label htmlFor="role">Role:</label>
-            <select id="role" className="form-control">
-              <option value="Student">Student</option>
-              <option value="Staff">Staff</option>
-              <option value="Admin">Admin</option>
-            </select>
+            <label htmlFor="keywords">Keywords:</label>
+            <input type="text" id="keywords" name="keywords" defaultValue={selectedFAQ ? selectedFAQ.keywords : ""} className="form-control" required />
           </div>
           <div className="form-group">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" className="form-control" />
+            <label htmlFor="answer">Answer:</label>
+            <textarea id="answer" name="answer" className="form-control" rows="4" defaultValue={selectedFAQ ? selectedFAQ.answer : ""} required></textarea>
           </div>
-          <button type="submit" className="btn btn-primary">Add User</button>
+          <button type="submit" className="btn btn-primary">Save FAQ</button>
         </form>
       </Modal>
     </div>
@@ -216,3 +222,4 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+ 

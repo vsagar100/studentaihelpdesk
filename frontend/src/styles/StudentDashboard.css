@@ -169,7 +169,7 @@
 
 /* Existing styles... */
 
-.upcoming-class-tile {
+.events-tile {
   background-color: #ffffff; /* Consistent background color */
   border-radius: 12px; /* Rounded corners for a modern look */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
@@ -178,17 +178,17 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover effect */
 }
 
-.upcoming-class-tile:hover {
+.events-tile:hover {
   transform: translateY(-5px); /* Lift effect on hover */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-.upcoming-class-list {
+.events-list {
   list-style-type: none;
   padding: 0;
 }
 
-.upcoming-class-list li {
+.events-list li {
   font-size: 14px;
   color: #666666;
   margin-bottom: 15px;
@@ -197,12 +197,12 @@
   align-items: center;
 }
 
-.upcoming-class-list li .class-name {
+.events-list li .class-name {
   font-weight: bold;
   color: #333333;
 }
 
-.upcoming-class-list li .class-time {
+.events-list li .class-time {
   color: #999999;
   font-size: 12px;
   text-align: right;
