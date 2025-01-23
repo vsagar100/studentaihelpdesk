@@ -6,6 +6,8 @@ backend/__pycache__/*
 backend/routes/__pycache__/*
 backend/uploads/*
 backend/uploads/college_ids/*
+backend/venv/*
+backend/venv
 
 /.pnp
 .pnp.js
