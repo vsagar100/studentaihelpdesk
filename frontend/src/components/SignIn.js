@@ -127,7 +127,7 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
         <img src={SigninImage} alt="Signin Background" className="signin-image" />
       </div>      
       <div className="signin-right">
-        <h1 className="main-heading">AI StudyPal</h1>
+        <h1 className="main-heading">Student Chatbot</h1>
         <h2 className="sub-heading">Admin Sign In</h2>
         <form onSubmit={handleSignIn}>
           <div className="form-group">

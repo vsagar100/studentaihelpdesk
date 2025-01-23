@@ -1,9 +1,94 @@
 /* src/styles/App.css */
 
+/* General Container Styling */
+body, #root{
+  width: 100%;
+}
 .app-container {
   display: flex;
-  height: 100vh; /* Full height to fit the viewport */
+  height: 100vh;
 }
+
+.main-area {
+  flex-grow: 1;
+  margin-left: 250px;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+
+.chat-header {
+  padding: 10px 20px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+}
+
+.chat-area {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.input-section {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #ddd;
+}
+
+.message-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.send-button {
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background: #0056b3;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background: white;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.dropdown-item {
+  text-decoration: none;
+  color: black;
+  display: block;
+  padding: 5px;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
 
 .sidebar {
   width: 250px;
@@ -25,7 +110,7 @@
 
 .main-area {
   flex-grow: 1;
-  margin-left: 150px; /* Default margin to accommodate the sidebar */
+  margin-left: 250px; /* Default margin to accommodate the sidebar */
   transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
 }
 

@@ -97,7 +97,7 @@
 }
 
 .pagination button.active {
-  background-color: #007bff !important; /* Highlighted background */
+  background: linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%) !important; /* Highlighted background */
   color: white; /* Highlighted text color */
   font-weight: bold;
   border-color: #007bff; /* Match button border */

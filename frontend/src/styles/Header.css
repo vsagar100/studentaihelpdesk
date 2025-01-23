@@ -1,6 +1,7 @@
 /* src/styles/Header.css */
 .dasboard-header {
-  background-color: #007bff;
+  background: linear-gradient(135deg, #3b82f6 0%, #4f46e5 100%);
+  background-blend-mode: overlay;
   color: #fff;
   padding: 10px 20px;
   display: flex;
