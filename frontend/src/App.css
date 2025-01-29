@@ -36,6 +36,7 @@
 .main-content {
   padding: 0px; /* Padding inside the main content for spacing */
   margin-top: 0px; /* Top margin to avoid overlap with header */
+  background: #f5f7fa;
 }
 
 .footer {

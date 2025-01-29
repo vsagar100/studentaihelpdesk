@@ -14,7 +14,7 @@ const AdminDashboard = () => {
   const [selectedFAQ, setSelectedFAQ] = useState(null);  
   const [faqs, setFAQs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5;
+  const recordsPerPage = 20;
 
   // Fetch FAQs from the backend API
   const fetchFAQs = async () => {

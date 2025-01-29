@@ -187,18 +187,21 @@ def update_faq(faq_id):
           return jsonify({"status": "error", "message": "FAQ not found, FAQ not updated."}), 404 
               
         #faq = FAQ(faq_id=faq_id, question=question, answer=answer, keywords=keywords)
+        print(faq_id)
+        print(faq)
+        print(keywords)
         faq.question = question
         faq.answer = answer
-        faq.keyword = keywords
+        faq.keywords = keywords
         #faq.embedding = embedding_vector 
         faq.set_embedding(embedding_vector)
-        
+        print(faq.keywords)
         # Save to the database
         db.session.commit()
         
         #update_faq_embeddings()
     
-        print(f"\n FAQ added successfully...")
+        print(f"\n FAQ updated successfully...")
         return jsonify({"status": "success", "message": "FAQ updated successfully"}), 200
       
       except Exception as e:

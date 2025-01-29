@@ -35,7 +35,7 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
   }, [user]);
   
   const handleHomeClick = async (e) => {
-    return <Navigate to="/" replace />;
+     navigate('/');
   
   }
   
@@ -48,57 +48,38 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
   };
 
 
-  const handleSignIn = (e) => {
-  e.preventDefault();
+  const handleSignIn = async (e) => {
+     e.preventDefault();
+    try {
+      const response = await fetch(`${BACKEND_API_URL}/api/auth/signin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uname, password }),
+      });
 
-  // Dummy credentials for testing
-  const dummyUsers = [
-    {
-      username: "admin",
-      password: "admin123",
-      role: "admin",
-      token: "dummy-admin-token",
-    },
-    {
-      username: "user",
-      password: "user123",
-      role: "user",
-      token: "dummy-user-token",
-    },
-  ];
+      const data = await response.json();
+      console.log(data);
+      if (data.status === 'success') {
+        // Set user in UserContext
+       // setUser({
+       //   username: data.user.username
+       // });
+        setUser(data.user);
 
-  // Simulate login verification
-  const user = dummyUsers.find(
-    (u) => u.username === uname && u.password === password
-  );
+        // Store token in localStorage (if needed for future requests)
+        localStorage.setItem('token', data.token);
 
-  if (user) {
-    // Simulate successful login response
-    const dummyResponse = {
-      status: "success",
-      user: {
-        username: user.username,
-        role: user.role,
-      },
-      token: user.token,
-    };
-
-    console.log(dummyResponse);
-
-    // Set user in UserContext
-    setUser(dummyResponse.user);
-
-    // Store token in localStorage (if needed for future requests)
-    localStorage.setItem("token", dummyResponse.token);
-
-    // Navigate to dashboard
-    const userRole = dummyResponse.user.role.charAt(0).toUpperCase() + dummyResponse.user.role.slice(1);
-    navigate(`/admin/dashboard`);
-  } else {
-    // Simulate failed login response
-    alert("Invalid username or password.");
-  }
-};
+        // Navigate to dashboard
+        //const userRole = data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1);
+        navigate('/admin/dashboard');
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error('Error logging in:', error);
+      alert('An error occurred. Please try again.');
+    }
+  };
 
   
 

@@ -46,22 +46,28 @@ const StudentHelpdesk = () => {
    navigate("/adminsignin");
  };
 
-const handleSend = () => {
-  if (userMessage.trim()) {
-    setMessages([...messages, { text: userMessage, sender: "user" }]);
-    setUserMessage("");
-    setLoading(true);
+const handleSend = async () => {
+   if (userMessage.trim()) {
+     setMessages([...messages, { text: userMessage, sender: "user" }]);
+     setUserMessage("");
+     setLoading(true);
 
-    // Simulate a response with dummy data
-    setTimeout(() => {
-      const dummyResponse = {
-        response: `You asked: "${userMessage}". Here's a dummy response!`, // Dummy response text
-      };
-      setMessages((prev) => [...prev, { text: dummyResponse.response, sender: "bot" }]);
-      setLoading(false);
-    }, 1000); // Simulate network delay of 1 second
-  }
-};
+     try {
+       // Fetch response from backend
+       const response = await fetch(`${BACKEND_API_URL}/api/faq/query`, {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({ query: userMessage }),
+       });
+       const data = await response.json();
+       setMessages((prev) => [...prev, { text: data.response, sender: "bot" }]);
+     } catch (error) {
+       setMessages((prev) => [...prev, { text: "Failed to send message. Try again later.", sender: "bot" }]);
+     } finally {
+       setLoading(false);
+     }
+   }
+ };
 
  const handleKeyPress = (event) => {
    if (event.key === "Enter") {
