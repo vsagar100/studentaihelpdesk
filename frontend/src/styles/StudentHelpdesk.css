@@ -125,3 +125,146 @@
 .send-button:hover {
   background: #2563eb;
 }
+
+/* Chat container styles */
+.chat-window {
+  padding: 20px;
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+  background-color: #f5f7fb;
+}
+
+/* Message bubbles base styles */
+.chat-bubble {
+  max-width: 80%;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border-radius: 12px;
+  position: relative;
+  word-wrap: break-word;
+  clear: both;
+}
+
+/* User message styles */
+.chat-bubble.user {
+  float: right;
+  background-color: #1e88e5;
+  color: white;
+  margin-left: 20%;
+  border-top-right-radius: 4px;
+  box-shadow: 0 2px 4px rgba(30, 136, 229, 0.2);
+}
+
+/* Bot message styles */
+.chat-bubble.bot {
+  float: left;
+  background-color: white;
+  color: #333;
+  margin-right: 20%;
+  border-top-left-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Clear float after each message */
+.chat-window::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Message timestamp and status */
+.chat-bubble::after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+/* Loading animation container */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+/* Welcome message container */
+.welcome-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.center-avatar {
+  margin: 0 auto 20px;
+  width: 80px !important;
+  height: 80px !important;
+}
+
+.welcome-title {
+  margin-bottom: 12px !important;
+  color: #333;
+}
+
+.welcome-subtitle {
+  color: #666;
+}
+
+/* Input container styles */
+.chat-input-container {
+  padding: 16px;
+  background-color: white;
+  border-top: 1px solid #e0e0e0;
+  position: sticky;
+  bottom: 0;
+}
+
+.chat-input {
+  background-color: #f5f7fb;
+  border-radius: 24px !important;
+}
+
+/* Send button styles */
+.send-button {
+  color: #1e88e5 !important;
+}
+
+.send-button:hover {
+  background-color: rgba(30, 136, 229, 0.1) !important;
+}
+
+/* Header styles */
+.header {
+  padding: 12px 16px;
+  background-color: white;
+  border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-avatar {
+  margin-right: 12px;
+}
+
+.header-title {
+  flex-grow: 1;
+  color: #333;
+}
+
+/* Time indicator for messages */
+.message-time {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* Message status indicators */
+.status-indicator {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+  text-align: right;
+}

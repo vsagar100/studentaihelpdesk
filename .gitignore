@@ -9,7 +9,8 @@ backend/uploads/college_ids/*
 
 /.pnp
 .pnp.js
-
+installer.bat
+uninstall_node.bat
 # testing
 /coverage
 

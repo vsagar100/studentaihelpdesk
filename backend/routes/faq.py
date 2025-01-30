@@ -189,7 +189,7 @@ def update_faq(faq_id):
         #faq = FAQ(faq_id=faq_id, question=question, answer=answer, keywords=keywords)
         faq.question = question
         faq.answer = answer
-        faq.keyword = keywords
+        faq.keywords = keywords
         #faq.embedding = embedding_vector 
         faq.set_embedding(embedding_vector)
         
@@ -231,7 +231,7 @@ def delete_faq(faq_id):
 def query_faq():
     data = request.get_json()
     print(data)
-    description = data.get('query')
+    description = data.get('userMessage')
    
     #regenerate_invalid_embeddings()
     
