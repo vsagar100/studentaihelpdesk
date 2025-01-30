@@ -9,16 +9,16 @@ export default function ChatInterface() {
   const [showMenu, setShowMenu] = useState(false);
   const { BACKEND_API_URL } = useContext(GlobalContext);
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
     if (userMessage.trim()) {
       setMessages([...messages, { text: userMessage, sender: 'user' }]);
       setUserMessage('');
-
       try {
+        // Fetch response from backend
         const response = await fetch(`${BACKEND_API_URL}/api/faq/query`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': 'http://localhost:3000' },
-          body: JSON.stringify({ query: userMessage }),
+          method: "POST",
+          headers: { "Content-Type": "application/json", },
+          body: JSON.stringify({ userMessage }),
         });
         const data = await response.json();
         setMessages((prev) => [...prev, { text: data.response, sender: 'bot' }]);
