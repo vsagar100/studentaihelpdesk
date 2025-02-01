@@ -34,7 +34,7 @@ const StudentHelpdesk = () => {
         setChatHistory([{ role: 'assistant', content: data.answer }, { role: 'user', content: description }, ...chatHistory]);
         setDescription(''); // Clear input field
       } else {
-        showFeedback('error', 'An error occured submtting the query: ');
+        showFeedback('error', 'An error occured submitting the query: ');
         //setError(data.error || 'An error occurred');
       }
     } catch (err) {

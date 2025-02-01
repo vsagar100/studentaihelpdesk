@@ -1,0 +1,920 @@
+{
+    "Academic": [
+        {
+            "question": "\"I am not able to understand the concepts in the advanced machine learning course.\"",
+            "answer": "\"Thank you for reaching out. We will arrange extra classes or suggest tutorial materials. Would you prefer a one-on-one session or a group discussion?\""
+        },
+        {
+            "question": "\"My marks for the midterm exam are not yet updated.\"",
+            "answer": "\"Your concern has been recorded. The academic office has been informed, and your grades will be updated within 2 working days.\""
+        },
+        {
+            "question": "\"I need clarification about the attendance policy.\"",
+            "answer": "\"The attendance policy has been shared in the student handbook. Would you like us to email it to you or arrange a discussion with the academic office?\""
+        },
+        {
+            "question": "\"The syllabus was not completed before the exam.\"",
+            "answer": "\"We will look into the matter with the course instructor. Meanwhile, additional study resources or tutorials will be provided.\""
+        },
+        {
+            "question": "\"I did not receive my course registration confirmation.\"",
+            "answer": "\"Please provide your registration ID. The academic office will verify and confirm within 1 working day.\""
+        },
+        {
+            "question": "\"I was marked absent in a class I attended.\"",
+            "answer": "\"Please share the date and course details. The attendance record will be reviewed and corrected if necessary.\""
+        },
+        {
+            "question": "\"The study material uploaded to the portal is incomplete.\"",
+            "answer": "\"We have informed the course instructor. The complete material will be uploaded by [specific date].\""
+        },
+        {
+            "question": "\"The exam dates for two subjects overlap.\"",
+            "answer": "\"We are investigating this issue and will release a revised schedule. Thank you for bringing this to our attention.\""
+        },
+        {
+            "question": "\"The lecture notes for my course are not available on the portal.\"",
+            "answer": "\"We will inform the course instructor to upload the lecture notes as soon as possible. Please check again by [specific date].\""
+        },
+        {
+            "question": "\"The class timings for my elective course are too inconvenient.\"",
+            "answer": "\"We will forward your feedback to the academic department. A scheduling review will be conducted for future semesters.\""
+        },
+        {
+            "question": "\"The online quizzes are not accessible from mobile devices.\"",
+            "answer": "\"Thank you for bringing this to our attention. Our IT department is working on ensuring compatibility across all devices.\""
+        },
+        {
+            "question": "\"The lab assignments are too difficult and time-consuming.\"",
+            "answer": "\"We will communicate with the course instructor regarding your concerns and may consider offering additional support or revised deadlines.\""
+        },
+        {
+            "question": "\"I missed the class due to an emergency, and I couldn't get the notes.\"",
+            "answer": "\"Please contact your class representative, who can provide you with the notes. You can also reach out to the instructor for any clarification.\""
+        },
+        {
+            "question": "\"My project topic was rejected without sufficient explanation.\"",
+            "answer": "\"We will arrange a meeting between you and the faculty member to clarify the reasoning behind the rejection and suggest alternative topics.\""
+        },
+        {
+            "question": "\"I received an unfair grade in my project.\"",
+            "answer": "\"Your project evaluation will be reviewed. If necessary, we will arrange for re-evaluation by an impartial faculty member.\""
+        },
+        {
+            "question": "\"There is a lack of resources in the programming lab.\"",
+            "answer": "\"The IT department has been informed. Additional machines will be made available, and resources will be updated.\""
+        },
+        {
+            "question": "\"I need additional time to complete my assignment due to health reasons.\"",
+            "answer": "\"Your request has been noted. Please submit a medical certificate, and we will arrange an extension for you.\""
+        },
+        {
+            "question": "\"The assignment submission portal is not accepting submissions.\"",
+            "answer": "\"The issue has been reported to the technical team. The portal will be available for submissions within [specific time].\""
+        },
+        {
+            "question": "\"The course content is outdated and doesn't reflect recent developments.\"",
+            "answer": "\"Thank you for your feedback. We are reviewing the course syllabus and will ensure it is updated with the latest information and trends.\""
+        },
+        {
+            "question": "\"I didn't receive my exam results yet.\"",
+            "answer": "\"Your exam results are under review. You will receive the final results within [specific time]. Thank you for your patience.\""
+        },
+        {
+            "question": "\"The assignments are given with very little time to complete.\"",
+            "answer": "\"We will forward your concern to the course coordinator to review the assignment deadlines and consider offering more time for students.\""
+        },
+        {
+            "question": "\"The online assessments are too difficult and do not match the class material.\"",
+            "answer": "\"We will gather feedback from students and instructors to ensure the online assessments are in line with the course material. Adjustments will be made if necessary.\""
+        },
+        {
+            "question": "\"I am unable to access certain online learning materials.\"",
+            "answer": "\"Please try clearing your browser cache and re-login. If the problem persists, our technical support team will assist you with resolving the issue.\""
+        },
+        {
+            "question": "\"The course instructor doesn't reply to emails in a timely manner.\"",
+            "answer": "\"We will notify the instructor regarding your concerns. Meanwhile, feel free to reach out to the academic coordinator if you need immediate assistance.\""
+        },
+        {
+            "question": "\"The grading criteria for assignments and exams were unclear.\"",
+            "answer": "\"We will request the course instructor to provide more detailed grading rubrics for better understanding. Your feedback is valuable for improving clarity.\""
+        },
+        {
+            "question": "\"I am unable to access my course materials because of a system error.\"",
+            "answer": "\"We have reported this issue to the IT department. They will resolve the system error, and you should regain access shortly.\""
+        },
+        {
+            "question": "\"The lectures are too fast-paced for me to follow.\"",
+            "answer": "\"We will inform the instructor to adjust the pace of the lectures or consider supplementary tutorials to help with understanding.\""
+        },
+        {
+            "question": "\"The classroom environment is not conducive to learning (e.g., overcrowding, distractions).\"",
+            "answer": "\"Thank you for sharing your concern. We will evaluate the classroom size and consider additional measures to minimize distractions and improve the learning environment.\""
+        },
+        {
+            "question": "\"The course material is not aligned with the lecture content.\"",
+            "answer": "\"Thank you for your feedback. We will review the course material and lecture structure to ensure better alignment.\""
+        },
+        {
+            "question": "\"I was marked as absent in a class that I attended.\"",
+            "answer": "\"We will review the attendance records for accuracy. You will be updated on any corrections made.\""
+        },
+        {
+            "question": "\"The assignments and exams focus too much on theory and not enough on practical application.\"",
+            "answer": "\"Your concern has been noted. We will provide more hands-on projects and practical assignments in future courses.\""
+        },
+        {
+            "question": "\"I don't understand the grading criteria for my assignments.\"",
+            "answer": "\"We will arrange a session where you can discuss grading criteria with your instructor. Clarification will be provided for future assignments.\""
+        },
+        {
+            "question": "\"My classmate is constantly disrupting the class, making it difficult to focus.\"",
+            "answer": "\"Thank you for your feedback. We will investigate the situation and take appropriate action to ensure a better learning environment.\""
+        },
+        {
+            "question": "\"The course is too advanced for my current level of knowledge.\"",
+            "answer": "\"We will notify the instructor and consider offering additional support such as remedial sessions or supplementary learning resources.\""
+        },
+        {
+            "question": "\"There's no clear roadmap for the course, and I'm confused about the assignments and exams.\"",
+            "answer": "\"We will request your instructor to provide a clear roadmap for the course and inform you about the key milestones and deadlines.\""
+        },
+        {
+            "question": "\"The mid-term exam had questions that were not covered in class.\"",
+            "answer": "\"We apologize for any confusion. We will review the exam and ensure that future assessments align better with the covered material.\""
+        },
+        {
+            "question": "\"The lectures are too long and lack engagement.\"",
+            "answer": "\"We will inform the instructor to consider shorter, more interactive sessions to improve student engagement.\""
+        },
+        {
+            "question": "\"The course schedule is very tight, with little time to prepare for exams.\"",
+            "answer": "\"We will review the course schedule and work with the instructor to ensure a more balanced timetable for students.\""
+        },
+        {
+            "question": "\"The course content is too theoretical and lacks real-world application.\"",
+            "answer": "\"Thank you for your feedback. We will collaborate with the course instructor to integrate more practical examples and case studies in the course content.\""
+        },
+        {
+            "question": "\"The class discussions are not interactive enough.\"",
+            "answer": "\"We will request the instructor to incorporate more interactive activities such as discussions, group work, and Q&A sessions to enhance student engagement.\""
+        },
+        {
+            "question": "\"I missed a class due to personal reasons and the lecture notes are not available.\"",
+            "answer": "\"Please reach out to the course coordinator or your classmates for the notes. We will also explore the option of recording lectures for future reference.\""
+        },
+        {
+            "question": "\"The course assessments do not accurately reflect the level of understanding required.\"",
+            "answer": "\"We will review the assessments with the instructor to ensure they reflect the required level of understanding and cognitive skills.\""
+        },
+        {
+            "question": "\"The instructor did not give enough time for questions during the lecture.\"",
+            "answer": "\"Thank you for the feedback. We will ask the instructor to allocate more time for student queries in future sessions.\""
+        },
+        {
+            "question": "\"There are no office hours available to meet with the instructor.\"",
+            "answer": "\"We will notify the instructor to set up designated office hours for students to meet and discuss academic concerns.\""
+        },
+        {
+            "question": "\"The course is too easy and does not challenge me.\"",
+            "answer": "\"We will review the course content and consider offering advanced materials or supplementary resources to challenge students further.\""
+        },
+        {
+            "question": "\"The assignments are repetitive and do not offer new learning opportunities.\"",
+            "answer": "\"We will work with the instructor to ensure that future assignments offer variety and encourage deeper exploration of the subject.\""
+        },
+        {
+            "question": "\"I did not receive any clarification after requesting help for an assignment.\"",
+            "answer": "\"We will ensure that your request is prioritized and will follow up with the instructor to ensure timely assistance.\""
+        },
+        {
+            "question": "\"The online classes are not as effective as in-person lectures.\"",
+            "answer": "\"We understand your concern. We will gather feedback from students and instructors to improve the effectiveness of online learning through better content delivery and interactivity.\""
+        },
+        {
+            "question": "\"The syllabus is outdated and does not include the latest advancements in the field.\"",
+            "answer": "\"Thank you for your feedback. We will review and update the syllabus to reflect the latest developments in the field.\""
+        },
+        {
+            "question": "\"The textbook recommended for the course is difficult to understand.\"",
+            "answer": "\"We will suggest supplementary materials or alternative textbooks to assist you in grasping the concepts better.\""
+        },
+        {
+            "question": "\"There are too many assignments in a short span of time.\"",
+            "answer": "\"We will work with instructors to spread out the assignments and provide more manageable deadlines.\""
+        },
+        {
+            "question": "\"The lectures are too fast-paced, and I cannot keep up.\"",
+            "answer": "\"We will request the instructor to slow down the lecture pace or provide additional resources for students who need more time.\""
+        },
+        {
+            "question": "\"There is no practical component in the course, and it's only theory-based.\"",
+            "answer": "\"We will consider incorporating practical labs or projects to complement the theoretical aspects of the course.\""
+        },
+        {
+            "question": "\"The professor does not respond to emails regarding class doubts.\"",
+            "answer": "\"We will remind the professor to be more responsive to student inquiries. In case of urgency, you can also reach out to the course coordinator.\""
+        },
+        {
+            "question": "\"The teaching assistant is not helpful during office hours.\"",
+            "answer": "\"We will inform the teaching assistant about the feedback and ensure they offer better support during office hours.\""
+        },
+        {
+            "question": "\"The mid-term exam did not reflect the topics we covered in class.\"",
+            "answer": "\"We will review the exam and ensure that future assessments are aligned with the topics covered in class.\""
+        },
+        {
+            "question": "\"The course lacks detailed lecture slides or notes for reference.\"",
+            "answer": "\"We will ask the instructor to provide comprehensive slides or notes to help students prepare better for exams.\""
+        },
+        {
+            "question": "\"There is no diversity in course materials, with limited perspectives presented.\"",
+            "answer": "\"We will work with the instructor to include a more diverse range of materials and viewpoints in the course.\""
+        }
+    ],
+    "Administrative": [
+        {
+            "question": "\"My scholarship application is still pending.\"",
+            "answer": "\"We apologize for the delay. Your application has been forwarded to the concerned authority for expedited processing. You will receive an update by [specific date].\""
+        },
+        {
+            "question": "\"The fee payment portal is not working.\"",
+            "answer": "\"Our IT team has been notified of the issue. Meanwhile, please try accessing the portal using a different browser. If the problem persists, we'll assist you with manual payment options.\""
+        },
+        {
+            "question": "\"My ID card has not been issued yet.\"",
+            "answer": "\"Your request is being processed. You will receive your ID card by [specific date]. If you need a temporary card, please visit the admin office.\""
+        },
+        {
+            "question": "\"The cafeteria menu is not updated daily.\"",
+            "answer": "\"We have informed the cafeteria management. The menu will be updated daily starting this week.\""
+        },
+        {
+            "question": "\"The institute bus service is not punctual.\"",
+            "answer": "\"We apologize for the inconvenience. The transport team will address this issue and ensure timely service.\""
+        },
+        {
+            "question": "\"The student portal is frequently down.\"",
+            "answer": "\"Our IT team is addressing the issue. Please use the backup portal link provided via email until the main system is restored.\""
+        },
+        {
+            "question": "\"My marksheet hasn't been issued yet.\"",
+            "answer": "\"We apologize for the delay. Your marksheet will be issued within the next 3 working days. Thank you for your patience.\""
+        },
+        {
+            "question": "\"I want to change my academic advisor.\"",
+            "answer": "\"Please provide the reason for the change, and we will forward your request to the academic office.\""
+        },
+        {
+            "question": "\"The attendance data for my course is incorrect.\"",
+            "answer": "\"Your attendance record will be reviewed. Any discrepancies will be corrected and updated shortly.\""
+        },
+        {
+            "question": "\"The registration process is not clear, and I missed the deadline.\"",
+            "answer": "\"We apologize for the confusion. We will review the registration process and ensure better communication for future sessions.\""
+        },
+        {
+            "question": "\"The student support desk is not responding to my query.\"",
+            "answer": "\"We are sorry for the inconvenience. We have escalated your query, and you should receive a response within the next 48 hours.\""
+        },
+        {
+            "question": "\"The course fee payment link is broken.\"",
+            "answer": "\"Our IT team is working to resolve the issue. Meanwhile, we'll send you a direct link for payment via email.\""
+        },
+        {
+            "question": "\"I am unable to access the library resources remotely.\"",
+            "answer": "\"We have informed the library staff. Remote access will be restored within [specific time].\""
+        },
+        {
+            "question": "\"I lost my certificate and need a duplicate.\"",
+            "answer": "\"You can apply for a duplicate certificate at the administration office. The processing time is [number] working days.\""
+        },
+        {
+            "question": "\"The online course registration system is very slow.\"",
+            "answer": "\"We apologize for the inconvenience. Our technical team is working on improving the system's speed and efficiency.\""
+        },
+        {
+            "question": "\"There are no instructions for the final exam in the course portal.\"",
+            "answer": "\"We have notified the course coordinator. Detailed instructions will be available on the portal by [specific date].\""
+        },
+        {
+            "question": "\"My student account was blocked without prior notice.\"",
+            "answer": "\"We apologize for the inconvenience. Please provide your student ID, and we will investigate the issue and restore access promptly.\""
+        },
+        {
+            "question": "\"I am having trouble accessing my transcript.\"",
+            "answer": "\"We will look into this issue and ensure that your transcript is accessible through the portal by [specific date].\""
+        },
+        {
+            "question": "\"I did not receive my hostel accommodation confirmation.\"",
+            "answer": "\"Your accommodation request is being processed. We will send you a confirmation within [specific time].\""
+        },
+        {
+            "question": "\"The notice boards are outdated and not regularly updated.\"",
+            "answer": "\"We will ensure that the notice boards are updated regularly and will also provide digital versions of notices on the student portal.\""
+        },
+        {
+            "question": "\"The institute's mobile app is not functioning properly.\"",
+            "answer": "\"We have alerted the mobile app development team. A new update will be released soon to fix the issue.\""
+        },
+        {
+            "question": "\"The registration process for extra-curricular activities is confusing.\"",
+            "answer": "\"Thank you for the feedback. We will simplify the registration process and provide clearer instructions for students in the future.\""
+        },
+        {
+            "question": "\"My leave application was not approved in time.\"",
+            "answer": "\"We apologize for the delay. We will review your leave application and ensure timely approvals moving forward.\""
+        },
+        {
+            "question": "\"There is a delay in the refund of my security deposit.\"",
+            "answer": "\"We have escalated this issue to the finance department. You should receive the refund within [specific time].\""
+        },
+        {
+            "question": "\"I didn't receive my course material in time for the semester start.\"",
+            "answer": "\"We will notify the academic office to ensure that course materials are distributed to students ahead of time for future semesters.\""
+        },
+        {
+            "question": "\"The email communication from the institute is too frequent and overwhelming.\"",
+            "answer": "\"We understand your concern. We will streamline email communication and ensure only important updates are sent to avoid inbox overload.\""
+        },
+        {
+            "question": "\"I did not receive a confirmation for my event registration.\"",
+            "answer": "\"We apologize for the inconvenience. Please provide your registration details, and we will ensure you receive confirmation immediately.\""
+        },
+        {
+            "question": "\"The student portal is very slow and difficult to navigate.\"",
+            "answer": "\"We are working on improving the performance and user experience of the portal. An update will be available soon.\""
+        },
+        {
+            "question": "\"I am unable to access the class schedule on the portal.\"",
+            "answer": "\"The issue has been reported. We will resolve it and ensure that the schedule is accessible without delay.\""
+        },
+        {
+            "question": "\"I did not receive any notification regarding the deadline extension for assignments.\"",
+            "answer": "\"We will ensure that such notifications are sent on time in the future. Please check your email or portal for updates.\""
+        },
+        {
+            "question": "\"I want to appeal my grade, but I don't know the process.\"",
+            "answer": "\"We will provide detailed instructions on the grade appeal process. Please submit your appeal within the specified time frame for consideration.\""
+        },
+        {
+            "question": "\"The communication from the administrative office is unclear and inconsistent.\"",
+            "answer": "\"We appreciate your feedback. We will review our communication process and work towards providing clearer, more consistent updates.\""
+        },
+        {
+            "question": "\"I am unable to get a response from the help desk.\"",
+            "answer": "\"We will escalate your issue to the help desk supervisor and ensure that you receive assistance promptly.\""
+        },
+        {
+            "question": "\"There is no proper mechanism to provide feedback about courses.\"",
+            "answer": "\"We will introduce a formal feedback system to ensure that all students can provide feedback on their courses.\""
+        },
+        {
+            "question": "\"I am unable to register for the elective courses I need.\"",
+            "answer": "\"Please provide your course preferences, and we will assist you in securing a spot in the elective courses of your choice.\""
+        },
+        {
+            "question": "\"The online registration for exams is not working.\"",
+            "answer": "\"The issue has been reported to the IT team. You will be able to register for exams as soon as the system is fixed.\""
+        },
+        {
+            "question": "\"I was charged extra fees for something I was not informed about.\"",
+            "answer": "\"We apologize for the confusion. Please share your details, and we will review the charges and correct any discrepancies.\""
+        },
+        {
+            "question": "\"The administrative staff is unhelpful when I need assistance.\"",
+            "answer": "\"We are sorry for your experience. We will provide additional training for the administrative team to improve their responsiveness and helpfulness.\""
+        },
+        {
+            "question": "\"The student portal keeps logging me out unexpectedly.\"",
+            "answer": "\"We will report this issue to the technical team for investigation and fix it so that you can access the portal without interruptions.\""
+        },
+        {
+            "question": "\"I have not received my degree certificate after completing my program.\"",
+            "answer": "\"Please provide your details, and we will expedite the process of issuing your certificate.\""
+        },
+        {
+            "question": "\"The registration process for courses is confusing and hard to navigate.\"",
+            "answer": "\"We appreciate your feedback. We will simplify the registration process and provide more detailed instructions for students in the future.\""
+        },
+        {
+            "question": "\"I have not received my internship placement details.\"",
+            "answer": "\"Your internship placement is being processed. We will notify you with the details as soon as possible.\""
+        },
+        {
+            "question": "\"The student ID card is not working properly at campus facilities.\"",
+            "answer": "\"We have informed the technical team. They will resolve the issue and ensure your ID card is functional.\""
+        },
+        {
+            "question": "\"I missed the registration deadline for an important event.\"",
+            "answer": "\"We will review the registration timeline and ensure that all students are given ample time to register for future events.\""
+        },
+        {
+            "question": "\"I am facing difficulty in accessing the e-library resources.\"",
+            "answer": "\"We have alerted the library team to look into the issue. You should be able to access the resources shortly.\""
+        },
+        {
+            "question": "\"The course registration system crashes frequently during peak hours.\"",
+            "answer": "\"We have reported this issue to the IT department. They will improve the system's stability and ensure it can handle high traffic.\""
+        },
+        {
+            "question": "\"I have been waiting for an update on my academic transcript, but nothing has been communicated.\"",
+            "answer": "\"We apologize for the delay. We will follow up with the administration and ensure you receive an update soon.\""
+        },
+        {
+            "question": "\"The exam scheduling system is disorganized, and I have conflicting exam dates.\"",
+            "answer": "\"We will investigate the scheduling conflict and work to reschedule your exams to ensure no overlaps.\""
+        },
+        {
+            "question": "\"The registration portal crashed during my exam registration.\"",
+            "answer": "\"We will report this to the IT department for an immediate fix, and we'll allow you to register manually.\""
+        },
+        {
+            "question": "\"There is a lack of transparency in the fee payment process.\"",
+            "answer": "\"We will work to improve the clarity of the fee payment process and ensure that all charges are clearly explained.\""
+        },
+        {
+            "question": "\"I was not informed about the extension for assignment submission.\"",
+            "answer": "\"We will ensure that future extension notifications are sent out in a timely manner via email or the student portal.\""
+        },
+        {
+            "question": "\"I received conflicting information from different administrative departments.\"",
+            "answer": "\"We will streamline communication between departments to ensure consistent and accurate information is provided to students.\""
+        },
+        {
+            "question": "\"There are no clear instructions for the scholarship application process.\"",
+            "answer": "\"We will provide clearer guidelines and a step-by-step process for students applying for scholarships.\""
+        },
+        {
+            "question": "\"I had issues receiving my refund for a canceled event.\"",
+            "answer": "\"We apologize for the inconvenience. Please provide your event details, and we will expedite your refund process.\""
+        },
+        {
+            "question": "\"I am facing difficulty in accessing course materials through the student portal.\"",
+            "answer": "\"We have notified the IT team, and they will resolve this issue to ensure that course materials are accessible without any problems.\""
+        },
+        {
+            "question": "\"I need an urgent document from the administration, but I am not getting any response.\"",
+            "answer": "\"We will escalate your request and ensure that you receive the required document at the earliest.\""
+        }
+    ],
+    "Hostel & Accommodation": [
+        {
+            "question": "\"The water supply in my hostel is inconsistent.\"",
+            "answer": "\"Thank you for reporting this issue. The maintenance team has been alerted and will resolve the problem within the next 24 hours. Please let us know if the issue persists.\""
+        },
+        {
+            "question": "\"There is no adequate lighting in the hostel corridors.\"",
+            "answer": "\"We have informed the hostel management to prioritize this. Additional lights will be installed by [specific date].\""
+        },
+        {
+            "question": "\"There is no internet connection in my hostel.\"",
+            "answer": "\"The IT department has been notified. The issue will be resolved within 24 hours.\""
+        },
+        {
+            "question": "\"My hostel room is very noisy, and I can't focus on my studies.\"",
+            "answer": "\"We have informed the hostel warden. Noise control measures will be implemented, and alternative room assignments will be considered.\""
+        },
+        {
+            "question": "\"There is no hot water supply in my hostel bathroom.\"",
+            "answer": "\"The maintenance team has been alerted, and the issue will be fixed by [specific date].\""
+        },
+        {
+            "question": "\"The hostel beds are uncomfortable.\"",
+            "answer": "\"We are reviewing the quality of the hostel furniture and will arrange for replacements if necessary.\""
+        },
+        {
+            "question": "\"The hostel does not allow visitors during holidays.\"",
+            "answer": "\"We understand your concern. We will forward your request to the hostel management and explore the possibility of policy adjustments.\""
+        },
+        {
+            "question": "\"My room does not have sufficient ventilation.\"",
+            "answer": "\"We have informed the hostel management. They will assess the situation and arrange for better ventilation or offer an alternative room if necessary.\""
+        },
+        {
+            "question": "\"The hostel bathroom is not cleaned regularly.\"",
+            "answer": "\"We apologize for the inconvenience. We have informed the housekeeping team to increase the frequency of cleaning in your area.\""
+        },
+        {
+            "question": "\"The Wi-Fi signal in the hostel is weak and unreliable.\"",
+            "answer": "\"The IT department has been notified. They will improve the Wi-Fi signal strength in the hostel by [specific date].\""
+        },
+        {
+            "question": "\"There is no common space for students to socialize in the hostel.\"",
+            "answer": "\"We will review the available spaces in the hostel and explore the possibility of creating more common areas for students.\""
+        },
+        {
+            "question": "\"I am being charged extra fees for my hostel stay without a valid reason.\"",
+            "answer": "\"We will review your billing statement and investigate the charges. Any discrepancies will be corrected, and you will be informed accordingly.\""
+        },
+        {
+            "question": "\"My hostel room is not cleaned regularly.\"",
+            "answer": "\"We apologize for the inconvenience. The cleaning schedule will be reviewed, and extra cleaning sessions will be added if necessary.\""
+        },
+        {
+            "question": "\"There are no study rooms available in the hostel.\"",
+            "answer": "\"We will review the available spaces in the hostel and explore the possibility of creating designated study areas for students.\""
+        },
+        {
+            "question": "\"The hostel is too far from the academic building.\"",
+            "answer": "\"We understand your concern. We will review transport options and may consider providing shuttle services for students.\""
+        },
+        {
+            "question": "\"I don't feel safe in my hostel.\"",
+            "answer": "\"We take safety seriously. Please report any specific safety concerns, and we will ensure that appropriate measures are taken to improve security.\""
+        },
+        {
+            "question": "\"The hot water supply in the hostel is not working.\"",
+            "answer": "\"We apologize for the inconvenience. Maintenance has been notified, and the issue will be resolved within 24 hours.\""
+        },
+        {
+            "question": "\"The hostel dining facilities are inadequate.\"",
+            "answer": "\"We will address this issue with the hostel management. Improvements will be made to the dining facilities based on student feedback.\""
+        },
+        {
+            "question": "\"I need an urgent room change due to health reasons.\"",
+            "answer": "\"Please provide your medical certificate, and we will assist you in arranging an alternative room that suits your needs.\""
+        },
+        {
+            "question": "\"The hostel charges are too high.\"",
+            "answer": "\"We understand your concern. The hostel fee structure will be reviewed, and any necessary adjustments will be made to ensure fairness.\""
+        },
+        {
+            "question": "\"The room lights are not functioning properly.\"",
+            "answer": "\"We have informed the maintenance team. The lights will be repaired as soon as possible.\""
+        },
+        {
+            "question": "\"There are no common facilities for socializing in the hostel.\"",
+            "answer": "\"We will assess the available spaces in the hostel and consider creating more recreational areas for students.\""
+        },
+        {
+            "question": "\"The hostel check-in process was disorganized and took too long.\"",
+            "answer": "\"We will review the hostel check-in process and introduce a more efficient system to ensure smoother check-ins.\""
+        },
+        {
+            "question": "\"The food quality in the hostel mess is poor.\"",
+            "answer": "\"We will address this with the hostel management and caterers to improve the quality and variety of food offered.\""
+        },
+        {
+            "question": "\"The hostel room is very noisy, making it difficult to concentrate.\"",
+            "answer": "\"We understand your concern. We will work on soundproofing the rooms or exploring options for quieter accommodations.\""
+        },
+        {
+            "question": "\"There is a lack of proper waste disposal in the hostel.\"",
+            "answer": "\"We will ensure that waste management protocols are improved in the hostel to maintain cleanliness and hygiene.\""
+        },
+        {
+            "question": "\"The hostel Wi-Fi is often down and very slow.\"",
+            "answer": "\"We have reported this issue to the IT team. They will work on improving the Wi-Fi connection in the hostel.\""
+        },
+        {
+            "question": "\"The hostel staff is not approachable when I need assistance.\"",
+            "answer": "\"We will ensure that hostel staff is trained to be more approachable and responsive to students' needs.\""
+        },
+        {
+            "question": "\"The hostel rooms are not well-ventilated.\"",
+            "answer": "\"We will evaluate the ventilation systems in the hostel and take necessary steps to improve airflow in the rooms.\""
+        },
+        {
+            "question": "\"The washing machines in the hostel are always out of service.\"",
+            "answer": "\"We will address this with the hostel management to ensure that the washing machines are regularly serviced and available for student use.\""
+        },
+        {
+            "question": "\"The hostel is too far from the academic building, making it difficult to attend classes.\"",
+            "answer": "\"We are working on providing shuttle services or exploring alternative accommodation options closer to the academic building.\""
+        },
+        {
+            "question": "\"I was overcharged for my hostel fees.\"",
+            "answer": "\"We apologize for the overcharge. Please provide your billing details, and we will investigate the issue and issue a refund if necessary.\""
+        },
+        {
+            "question": "\"The hostel management does not allow visitors after hours, making it difficult for students' families to meet.\"",
+            "answer": "\"We will review the hostel visitor policies and discuss flexibility for families wishing to visit students at convenient times.\""
+        },
+        {
+            "question": "\"The food served in the hostel mess is repetitive and lacks variety.\"",
+            "answer": "\"We will collaborate with the hostel management to provide a wider variety of meal options and ensure better nutritional value.\""
+        },
+        {
+            "question": "\"The hostel is very far from the academic block, causing time constraints for attending lectures.\"",
+            "answer": "\"We are working on providing shuttle services between the hostel and academic buildings to save time for students.\""
+        },
+        {
+            "question": "\"The hostel's water supply is inconsistent and often stops working.\"",
+            "answer": "\"We have informed the maintenance team about the issue. It will be addressed promptly to ensure a continuous water supply.\""
+        },
+        {
+            "question": "\"I feel uncomfortable with my roommate's behavior.\"",
+            "answer": "\"We will assist you in finding a more suitable accommodation option or mediate a discussion to resolve any misunderstandings.\""
+        },
+        {
+            "question": "\"There is no proper laundry facility in the hostel.\"",
+            "answer": "\"We will look into setting up a dedicated laundry service in the hostel or provide students with alternative solutions.\""
+        },
+        {
+            "question": "\"The hostel Wi-Fi is often slow or unavailable.\"",
+            "answer": "\"We will report this issue to the IT team, who will work on improving the Wi-Fi network within the hostel.\""
+        },
+        {
+            "question": "\"The beds and furniture in the hostel rooms are uncomfortable.\"",
+            "answer": "\"We will assess the condition of the furniture and consider upgrading it to ensure better comfort for students.\""
+        },
+        {
+            "question": "\"There is no proper recreational space or common room in the hostel.\"",
+            "answer": "\"We will consider creating a recreational space or common area for students to relax and socialize.\""
+        },
+        {
+            "question": "\"The hostel charges are unreasonable given the services provided.\"",
+            "answer": "\"We will review the hostel fee structure to ensure it is fair and reflective of the services offered.\""
+        }
+    ],
+    "Infrastructure": [
+        {
+            "question": "\"The Wi-Fi speed in the library is too slow.\"",
+            "answer": "\"We understand the inconvenience. The IT department has been informed and will upgrade the network speed by [specific date].\""
+        },
+        {
+            "question": "\"The lab equipment in the electronics lab is not functioning properly.\"",
+            "answer": "\"The lab in-charge has been informed, and a technician will inspect the equipment within 48 hours.\""
+        },
+        {
+            "question": "\"The projector in the classroom is not working.\"",
+            "answer": "\"The issue has been reported to the technical support team. It will be fixed before the next class.\""
+        },
+        {
+            "question": "\"There is no drinking water available in the lab area.\"",
+            "answer": "\"We will install additional water dispensers in the lab area within the week.\""
+        },
+        {
+            "question": "\"The gym equipment is outdated and unsafe.\"",
+            "answer": "\"We have notified the sports department. New equipment is being procured and will be installed soon.\""
+        },
+        {
+            "question": "\"The library doesn't have enough copies of essential textbooks.\"",
+            "answer": "\"The library team will procure additional copies and notify you when they are available.\""
+        }
+    ],
+    "Health & Safety": [
+        {
+            "question": "\"The medical center is not open during the designated hours.\"",
+            "answer": "\"We apologize for the inconvenience. We will ensure that the medical center adheres to the schedule. In case of emergencies, please contact [emergency number].\""
+        },
+        {
+            "question": "\"The campus is poorly lit during nighttime, and it feels unsafe.\"",
+            "answer": "\"Your safety is our priority. Additional lighting and security patrols will be arranged immediately. Thank you for highlighting this concern.\""
+        },
+        {
+            "question": "\"There are no fire extinguishers in the hostel.\"",
+            "answer": "\"Thank you for raising this issue. Fire extinguishers will be installed in all hostel buildings within the next 3 days.\""
+        },
+        {
+            "question": "\"The first aid kit in the lab is not restocked.\"",
+            "answer": "\"The lab in-charge has been informed. The kit will be restocked by the end of the day.\""
+        },
+        {
+            "question": "\"The campus has poor accessibility for students with disabilities.\"",
+            "answer": "\"We will assess the campus accessibility and work with the relevant departments to implement improvements, such as ramps and accessible facilities.\""
+        },
+        {
+            "question": "\"There are no emergency exit signs in the classrooms.\"",
+            "answer": "\"The safety team has been notified. Emergency exit signs will be installed in all classrooms within the next [specific time].\""
+        },
+        {
+            "question": "\"The campus security personnel are not attentive and seem uninterested.\"",
+            "answer": "\"We take your safety seriously. The security team will undergo a review and receive additional training to improve vigilance.\""
+        },
+        {
+            "question": "\"I am not sure where to go for medical assistance on campus.\"",
+            "answer": "\"The campus medical center is located at [specific location]. You can contact the emergency services at [emergency number] for immediate help.\""
+        },
+        {
+            "question": "\"The lighting in some areas of the campus is too dim, making it unsafe to walk at night.\"",
+            "answer": "\"We appreciate your concern. Additional lighting will be installed in dimly lit areas for student safety by [specific date].\""
+        },
+        {
+            "question": "\"The campus is not wheelchair accessible.\"",
+            "answer": "\"We are reviewing campus accessibility and will work on providing ramps and other facilities to make the campus more accessible to all students.\""
+        },
+        {
+            "question": "\"There are no health check-up facilities on campus.\"",
+            "answer": "\"We will introduce regular health check-up camps on campus to ensure students' health and well-being.\""
+        },
+        {
+            "question": "\"There is no emergency evacuation plan available in the classrooms.\"",
+            "answer": "\"We will ensure that all classrooms are equipped with visible emergency evacuation plans and conduct drills regularly.\""
+        },
+        {
+            "question": "\"There are no sufficient medical supplies in the campus first-aid kits.\"",
+            "answer": "\"We will inspect the first-aid kits across campus and restock them with necessary supplies.\""
+        },
+        {
+            "question": "\"I was feeling unwell and had no one to contact for help during the night.\"",
+            "answer": "\"We will introduce an on-call medical service that students can reach out to during off-hours for urgent assistance.\""
+        },
+        {
+            "question": "\"The campus gym is overcrowded during peak hours.\"",
+            "answer": "\"We will assess the usage patterns of the gym and consider expanding the facility or introducing booking systems to manage crowding.\""
+        },
+        {
+            "question": "\"There are no clear hygiene standards in the hostel kitchen.\"",
+            "answer": "\"We will review the cleanliness and hygiene practices of the hostel kitchen and implement strict hygiene protocols.\""
+        },
+        {
+            "question": "\"The campus lacks clean drinking water stations.\"",
+            "answer": "\"We will install additional water dispensers in key areas of the campus to provide easy access to clean drinking water.\""
+        },
+        {
+            "question": "\"There are no proper medical records being kept for students.\"",
+            "answer": "\"We will implement a more structured medical record-keeping system to ensure that students' health data is securely stored and accessible.\""
+        },
+        {
+            "question": "\"The campus is poorly lit, making it unsafe at night.\"",
+            "answer": "\"We will increase the lighting in poorly lit areas of the campus to improve safety and visibility during nighttime.\""
+        },
+        {
+            "question": "\"There is no first-aid kit in the classrooms.\"",
+            "answer": "\"We will ensure that all classrooms are equipped with first-aid kits for emergencies.\""
+        },
+        {
+            "question": "\"The campus lacks proper fire safety equipment.\"",
+            "answer": "\"We take safety seriously. We will review and update our fire safety protocols, ensuring that fire extinguishers and alarms are installed in all necessary areas.\""
+        },
+        {
+            "question": "\"There are no proper guidelines for health and wellness on campus.\"",
+            "answer": "\"We will introduce health and wellness programs, along with clear guidelines, to promote a healthy lifestyle among students.\""
+        },
+        {
+            "question": "\"There are not enough mental health resources or counseling services available.\"",
+            "answer": "\"We recognize the importance of mental health. We will expand counseling services and introduce awareness programs to ensure students' well-being.\""
+        },
+        {
+            "question": "\"There is a lack of proper medical facilities on campus.\"",
+            "answer": "\"We will review our campus health services and consider improving the availability of medical resources for students.\""
+        },
+        {
+            "question": "\"The campus is not well-lit at night, making it unsafe to walk.\"",
+            "answer": "\"We will enhance the campus lighting in poorly lit areas to improve student safety during night hours.\""
+        },
+        {
+            "question": "\"The washrooms on campus are not clean and lack hygiene.\"",
+            "answer": "\"We will inform the housekeeping team to ensure more frequent cleaning and hygiene checks in the campus washrooms.\""
+        },
+        {
+            "question": "\"The cafeteria does not offer enough healthy food options.\"",
+            "answer": "\"We will discuss with the cafeteria management to introduce healthier food options and ensure a balanced menu for students.\""
+        },
+        {
+            "question": "\"There is no designated space for students to exercise or relax.\"",
+            "answer": "\"We will explore the possibility of creating a designated wellness or recreation area to promote physical and mental health.\""
+        },
+        {
+            "question": "\"I was not informed about the vaccination drive on campus.\"",
+            "answer": "\"We will improve communication about health-related events and vaccination drives to ensure all students are informed in a timely manner.\""
+        },
+        {
+            "question": "\"There are not enough fire exits in the academic buildings.\"",
+            "answer": "\"We will assess the current safety measures and ensure that all academic buildings have adequate fire exits.\""
+        },
+        {
+            "question": "\"There are no proper sanitation facilities during outdoor events or activities.\"",
+            "answer": "\"We will ensure that sufficient sanitation facilities are provided during future outdoor events to maintain hygiene.\""
+        },
+        {
+            "question": "\"The campus lacks proper seating areas in outdoor spaces for students to relax.\"",
+            "answer": "\"We will explore the possibility of installing more seating areas around the campus for students to enjoy.\""
+        },
+        {
+            "question": "\"There is no clear procedure for handling medical emergencies on campus.\"",
+            "answer": "\"We will establish a clear and accessible emergency medical response plan to ensure students' safety during medical emergencies.\""
+        },
+        {
+            "question": "\"The campus is not easily accessible for students with disabilities.\"",
+            "answer": "\"We are working on making the campus more accessible, including adding ramps, elevators, and other support systems for students with disabilities.\""
+        },
+        {
+            "question": "\"There is no proper parking facility for students' bicycles or motorbikes.\"",
+            "answer": "\"We will look into providing designated and secure parking spaces for students' bicycles and motorbikes.\""
+        },
+        {
+            "question": "\"The gym on campus is overcrowded and does not have enough equipments.\"",
+            "answer": "\"We will assess the gym usage and consider expanding the facilities or introducing a booking system to manage crowding.\""
+        },
+        {
+            "question": "\"The campus lacks sufficient drinking water stations.\"",
+            "answer": "\"We will install more drinking water stations in key areas to ensure students have easy access to clean water.\""
+        },
+        {
+            "question": "\"The air quality in some campus buildings is poor and needs improvement.\"",
+            "answer": "\"We will work on improving the ventilation and air quality in affected buildings to create a healthier environment.\""
+        },
+        {
+            "question": "\"The campus lacks adequate mental health support services.\"",
+            "answer": "\"We are expanding our mental health services and will provide more counseling options and workshops to support students.\""
+        }
+    ],
+    "Disciplinary": [
+        {
+            "question": "\"I am being harassed by a fellow student.\"",
+            "answer": "\"We take such matters seriously. Your complaint has been forwarded to the grievance redressal committee. You will be contacted privately to discuss the next steps.\""
+        },
+        {
+            "question": "\"There is a lot of noise in the hostel after quiet hours.\"",
+            "answer": "\"The hostel warden has been notified. Quiet hours will be strictly enforced moving forward.\""
+        },
+        {
+            "question": "\"I witnessed unfair treatment by a faculty member.\"",
+            "answer": "\"We take such complaints seriously. Please share specific details, and our grievance committee will investigate.\""
+        },
+        {
+            "question": "\"Bullying incidents are occurring in the hostel.\"",
+            "answer": "\"This issue is under investigation. Anonymous reporting is encouraged to ensure action is taken swiftly.\""
+        },
+        {
+            "question": "\"I witnessed a violation of academic integrity but don't know how to report it.\"",
+            "answer": "\"We have an anonymous reporting system in place for such violations. You can report the issue directly through the grievance portal.\""
+        },
+        {
+            "question": "\"A faculty member showed favoritism towards certain students.\"",
+            "answer": "\"We take such concerns seriously. Please provide more details, and the grievance committee will investigate the matter.\""
+        },
+        {
+            "question": "\"I was unfairly penalized for a minor violation.\"",
+            "answer": "\"We will review the circumstances and the disciplinary decision. A meeting with the concerned department will be arranged if necessary.\""
+        },
+        {
+            "question": "\"I feel discriminated against in my group project because of my background.\"",
+            "answer": "\"We are committed to creating an inclusive environment. We will look into the matter and take appropriate actions to resolve any concerns of discrimination.\""
+        },
+        {
+            "question": "\"There is bullying happening in my department, and it's affecting my well-being.\"",
+            "answer": "\"Your well-being is our priority. We will investigate the situation and provide you with the necessary support and intervention.\""
+        },
+        {
+            "question": "\"I was falsely accused of cheating during an exam.\"",
+            "answer": "\"We will conduct a thorough investigation into the matter and ensure that your side of the story is heard. We aim for a fair and impartial review.\""
+        },
+        {
+            "question": "\"I was harassed by a fellow student in the hostel.\"",
+            "answer": "\"We take such issues seriously. Please provide more details so that we can initiate an investigation and take immediate action.\""
+        },
+        {
+            "question": "\"The disciplinary actions taken against me were not communicated properly.\"",
+            "answer": "\"We will review the process and ensure that any disciplinary actions are communicated clearly and with full transparency.\""
+        },
+        {
+            "question": "\"I feel uncomfortable in certain group activities due to peer pressure.\"",
+            "answer": "\"We understand your concern. We will address the issue with the concerned department to ensure a respectful and inclusive atmosphere in group activities.\""
+        },
+        {
+            "question": "\"My academic freedom is being restricted by a faculty member.\"",
+            "answer": "\"We respect your academic freedom. Please share specific details, and we will investigate and address the matter with the faculty member involved.\""
+        },
+        {
+            "question": "\"I feel unfairly treated in the grading system compared to my peers.\"",
+            "answer": "\"We will review your grading criteria and discuss it with the concerned faculty member to ensure fairness in the assessment process.\""
+        },
+        {
+            "question": "\"A fellow student has been consistently violating campus rules, but no action is being taken.\"",
+            "answer": "\"We will investigate the matter and ensure appropriate disciplinary actions are taken in accordance with the campus policies.\""
+        },
+        {
+            "question": "\"I feel uncomfortable with the behavior of a faculty member towards students.\"",
+            "answer": "\"We take such concerns seriously. Please provide further details, and we will address the issue promptly.\""
+        },
+        {
+            "question": "\"I was given an unfair penalty for a group project mistake that wasn't mine.\"",
+            "answer": "\"We will review the incident and ensure that penalties are applied fairly based on individual contributions to group work.\""
+        },
+        {
+            "question": "\"I was accused of cheating during an exam, but I didn't do it.\"",
+            "answer": "\"We will conduct a fair investigation into the matter and ensure that your case is reviewed thoroughly and impartially.\""
+        },
+        {
+            "question": "\"I feel I was wrongly expelled or suspended.\"",
+            "answer": "\"We will review the circumstances leading to your expulsion or suspension and ensure that the decision was based on fair grounds.\""
+        },
+        {
+            "question": "\"I was not provided a chance to appeal a disciplinary decision.\"",
+            "answer": "\"We will ensure that you are informed about"
+        }
+    ],
+    "Extracurricular Activity": [
+        {
+            "question": "\"The sports equipment is outdated and unusable.\"",
+            "answer": "\"We value your feedback. New equipment has been approved and will be available by [specific date].\""
+        },
+        {
+            "question": "\"The timing of club meetings clashes with my classes.\"",
+            "answer": "\"We will coordinate with the club and academic schedule to find a suitable timing. Please share your available time slots.\""
+        },
+        {
+            "question": "\"I was not informed about the sports trials in time.\"",
+            "answer": "\"We will ensure better communication about events. Please subscribe to the sports department's notification channel.\""
+        },
+        {
+            "question": "\"The cultural club does not accommodate students from diverse backgrounds.\"",
+            "answer": "\"Thank you for your feedback. We will organize discussions to make club activities more inclusive."
+        }
+    ]
+}

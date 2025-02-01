@@ -3,9 +3,11 @@ import { GlobalContext } from '../GlobalState';
 import SubmitGrievance from './SubmitGrievance';
 import Modal from './Modal';
 import FeedbackModal from './FeedbackModal';
+import AnnouncementsModal from './AnnouncementsModal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import '../styles/StudentDashboard.css';
+import { UserContext } from './UserContext';
 
 const StudentDashboard = () => {
   const { BACKEND_API_URL } = useContext(GlobalContext);
@@ -14,73 +16,70 @@ const StudentDashboard = () => {
   const [showViewGrievanceModal, setShowViewGrievanceModal] = useState(false);
   const [selectedGrievance, setSelectedGrievance] = useState(null);
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [feedback, setFeedback] = useState({ show: false, type: '', message: '' });
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 5;
+  const { user } = useContext(UserContext);
 
-  // Function to close feedback modal
-  const handleCloseFeedback = () => {
-    setFeedback({ show: false, type: '', message: '' });
-  };
+  // Announcements State
+  const [announcements, setAnnouncements] = useState([]);
+  const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
+  const [showAnnouncementsModal, setShowAnnouncementsModal] = useState(false);
 
   // Fetch grievances from the backend API
   const fetchGrievances = async () => {
     try {
-      // Get the JWT token from localStorage
       const token = localStorage.getItem('token');
       const response = await fetch(`${BACKEND_API_URL}/api/grievances/get/all_cur_user`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`, // Send token in Authorization header
-                'Content-Type': 'application/json',
-            },
-        });
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('Response is not JSON');
-      }
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
       const data = await response.json();
-      setGrievances(data);
+      if (Array.isArray(data)) {
+        setGrievances(data);
+      } else {
+        setGrievances([]);  // Fallback to empty array if data is not an array
+      }
     } catch (err) {
       console.error('Error fetching grievances:', err);
       setError('Error fetching grievances: ' + err.message);
-      showFeedback('error', 'Error fetching grievances: ' + err.message);
+    }
+  };
+
+  // Fetch announcements from the backend API
+  const fetchAnnouncements = async () => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`${BACKEND_API_URL}/api/announcements/`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        //  'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setAnnouncements(data.filter(announcement => !announcement.is_expired));
+      } else {
+        setAnnouncements([]);
+      }
+    } catch (err) {
+      console.error('Error fetching announcements:', err);
+      setError('Error fetching announcements: ' + err.message);
     }
   };
 
   useEffect(() => {
     fetchGrievances();
-  }, [BACKEND_API_URL]);
-
-  // Handle grievance submission
-  const handleGrievanceSubmit = async (formData) => {
-    console.log("handleGrievanceSubmit");
-    setError(null);
-    setMessage('');
-    try {
-      const response = await fetch(`${BACKEND_API_URL}/api/grievance/submit`, {
-        method: 'POST',
-        body: formData,
-      });
-
-      const result = await response.json();
-      if (response.ok) {
-        setMessage('Grievance submitted successfully!');
-        setShowGrievanceModal(false);
-        fetchGrievances();
-        showFeedback('success', 'Grievance submitted successfully!');
-      } else {
-        throw new Error(result.message || 'An error occurred while submitting the grievance');
-      }
-    } catch (err) {
-      setError('An error occurred: ' + err.message);
-      showFeedback('error', 'An error occurred: ' + err.message);
-    }
-  };
-
-   const handleViewGrievance = async (grievanceId) => {
+    fetchAnnouncements();
+  }, []);
+  
+  const handleViewGrievance = async (grievanceId) => {
     setIsLoading(true);
     setError(null); // Clear previous errors
     const grievance = grievances.find(g => g.id === grievanceId); // Find the selected grievance
@@ -96,31 +95,50 @@ const StudentDashboard = () => {
     setIsLoading(false); // Stop loading
   };
   
-  // Close modal handleCloseViewGrievanceModal
-  const handleCloseViewGrievanceModal = () => {
-    setShowViewGrievanceModal(false); // Close the modal
-    setSelectedGrievance(null); // Reset selected grievance
-  };
-
   const showFeedback = (type, message) => {
     setFeedback({ show: true, type, message });
   };
 
+  const handleViewAnnouncement = (announcement) => {
+    setSelectedAnnouncement(announcement);
+    console.log(announcement);
+    setShowAnnouncementsModal(true);
+  };
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const currentRecords = grievances.slice((currentPage - 1) * recordsPerPage, currentPage * recordsPerPage);
+  
+  const toCamelCase = (str) => {
+  return str
+    .toLowerCase() // Convert the whole string to lower case
+    .split(' ')    // Split the string by spaces
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(' ');    // Join the words back together
+};
 
   return (
     <div className="dashboard-container">
       <div className="main-section">
         <div className="good-job-tile">
-          <h3>Good Job, Sarah. Keep Going!!</h3>
-          <p>Your tasks are 80% completed this week. Progress is very good!!!</p>
+          {user ? <h3>Welcome, {user?.username ? toCamelCase(user.username) : 'Guest'}!</h3> : <h3>No user logged in</h3>}
           <button className="submit-grievance-button" onClick={() => setShowGrievanceModal(true)}>
             Submit Grievance
           </button>
 
           <Modal show={showGrievanceModal} handleClose={() => setShowGrievanceModal(false)} title="Submit Grievance">
-            <SubmitGrievance onSubmit={handleGrievanceSubmit} handleClose={() => setShowGrievanceModal(false)} />
+            <SubmitGrievance handleClose={() => setShowViewGrievanceModal(false)} />
+          </Modal>
+          <Modal show={showViewGrievanceModal} handleClose={() => setShowViewGrievanceModal(false)} title="View Grievance">
+            {selectedGrievance ? (
+              <div className="grievance-details">
+                <p><strong>ID:</strong> {selectedGrievance.id}</p>
+                <p><strong>Category:</strong> {selectedGrievance.category}</p>
+                <p><strong>Description:</strong> {selectedGrievance.description}</p>
+                <p><strong>Status:</strong> {selectedGrievance.status}</p>
+              </div>
+            ) : (
+              <p>Loading grievance details...</p>
+            )}
           </Modal>
 
           <table className="grievance-table">
@@ -144,15 +162,9 @@ const StudentDashboard = () => {
                 currentRecords.map((grievance) => (
                   <tr key={grievance.id}>
                     <td>{grievance.id}</td>
-                    <td>{grievance.category}</td>
+                    <td>{grievance.category || 'N/A'}</td>
                     <td>{grievance.description}</td>
-                    <td>
-                      <FontAwesomeIcon
-                        icon={grievance.status === 'submitted' ? faCheckCircle : faTimesCircle}
-                        className={`status-icon ${grievance.status === 'submitted' ? 'status-open' : 'status-closed'}`}
-                      />
-                      {grievance.status}
-                    </td>
+                    <td>{grievance?.status ? toCamelCase(grievance.status) : 'N/A'}</td>
                     <td>
                       <button onClick={() => handleViewGrievance(grievance.id)}>
                         <FontAwesomeIcon icon={faEye} className="view-icon" />
@@ -179,13 +191,30 @@ const StudentDashboard = () => {
         <div className="announcements-tile">
           <h3>Announcements & Notifications</h3>
           <ul className="announcements-list">
-            <li>New grading policy effective next semester.</li>
-            <li>Library will be closed for maintenance on 5th July.</li>
-            <li>Submit your assignments by the end of this month.</li>
+            {announcements.length > 0 ? (
+              announcements.map((announcement) => (
+                <li key={announcement.id}>
+                  <a href="#" onClick={() => handleViewAnnouncement(announcement)}>
+                    {announcement.title}
+                  </a>
+                </li>
+              ))
+            ) : (
+              <li>No Announcements yet!</li>
+            )}
           </ul>
+          
+          <Modal show={showAnnouncementsModal} handleClose={() => setShowAnnouncementsModal(false)} title="Announcements Details">
+            {selectedAnnouncement && (
+                <AnnouncementsModal
+                    announcements={selectedAnnouncement}
+                    handleClose={() => setShowAnnouncementsModal(false)}
+                />
+            )}
+          </Modal>
         </div>
 
-        {/* Re-added Upcoming Events */}
+        {/* Upcoming Events */}
         <div className="events-tile">
           <h3>Upcoming Events</h3>
           <ul className="events-list">
@@ -195,33 +224,10 @@ const StudentDashboard = () => {
           </ul>
         </div>
       </div>
-      
-      <Modal show={showViewGrievanceModal} handleClose={handleCloseViewGrievanceModal} title="View Grievance">
-      {selectedGrievance ? (
-        <div className="grievance-details">
-          <p><strong>ID:</strong> {selectedGrievance.id}</p>
-          <p><strong>Category:</strong> {selectedGrievance.category}</p>
-          <p><strong>Description:</strong> {selectedGrievance.description}</p>
-          <p><strong>Status:</strong> {selectedGrievance.status}</p>
-          {/* Display the uploaded file */}
-          
-          {selectedGrievance.file_path && (
-            <div className="grievance-file">
-            <p><strong>File:</strong> </p>
-              <a href={BACKEND_API_URL+selectedGrievance.file_path} target="_blank" rel="noopener noreferrer">
-                {selectedGrievance.file_path.split('/').pop()}  {/* Extracts and displays the file name */}
-              </a>
-          </div>
-          )}
-        </div>
-      ) : (
-        <p>Loading grievance details...</p>
-      )}
-    </Modal>
 
       <FeedbackModal
         show={feedback.show}
-        handleClose={handleCloseFeedback}
+        handleClose={() => setFeedback({ show: false, type: '', message: '' })}
         type={feedback.type}
         message={feedback.message}
       />

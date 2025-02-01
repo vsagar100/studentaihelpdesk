@@ -14,6 +14,7 @@ import SignUp from './components/SignUp';
 import Test from './components/Test';
 import { SidebarContext } from './contexts/SidebarContext';
 import './App.css';
+import { UserProvider } from './components/UserContext';
 
 function App() {
   const location = useLocation();
@@ -57,51 +58,55 @@ function App() {
   
 
   return (
-    <div className={`app-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
-      {!noAuthRoutes.includes(location.pathname) ? (
-        <>
-          <Sidebar
-            isSidebarOpen={isSidebarOpen}
-            userRole={userRole}
-            userName={userName}
-            userProfilePic={userProfilePic}
-          />
-          <div className="main-area">
-            <Header toggleSidebar={toggleSidebar} />
-            <div className="main-content">
-              <Routes>
-                {userRole === 'Student' && (
-                  <Route path="/student/dashboard" element={<StudentDashboard />} />
-                )}
-                {userRole === 'Staff' && (
-                  <Route path="/staff/dashboard" element={<StaffDashboard />} />
-                )}
-                {userRole === 'Admin' && (
-                  <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                )}
-                {userRole === 'Student' && (
-                  <Route path="/student/helpdesk" element={<StudentHelpdesk />} />
-                )}
-                {userRole === 'Student' && (
-                  <Route path="/student/addfaq" element={<AddFAQ />} />
-                )}
-                {/* Redirect root path to sign-in */}
-                <Route path="/" element={<Navigate to="/signin" />} />
-              </Routes>
-              <Footer />
+    <UserProvider>
+      <div className={`app-container ${isSidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'}`}>
+        {!noAuthRoutes.includes(location.pathname) ? (
+          <>
+            <Sidebar
+              isSidebarOpen={isSidebarOpen}
+              userRole={userRole}
+              userName={userName}
+              userProfilePic={userProfilePic}
+            />
+            <div className="main-area">
+              <Header toggleSidebar={toggleSidebar} />
+              <div className="main-content">
+                
+                  <Routes>
+                    {userRole === 'Student' && (
+                      <Route path="/student/dashboard" element={<StudentDashboard />} />
+                    )}
+                    {userRole === 'Staff' && (
+                      <Route path="/staff/dashboard" element={<StaffDashboard />} />
+                    )}
+                    {userRole === 'Admin' && (
+                      <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                    )}
+                    {userRole === 'Student' && (
+                      <Route path="/student/helpdesk" element={<StudentHelpdesk />} />
+                    )}
+                    {userRole === 'Student' && (
+                      <Route path="/student/addfaq" element={<AddFAQ />} />
+                    )}
+                    {/* Redirect root path to sign-in */}
+                    <Route path="/" element={<Navigate to="/signin" />} />
+                  </Routes>              
+                  <Footer />
+              </div>
             </div>
+          </>
+        ) : (
+          <div className="auth-content">
+              <Routes>             
+                <Route path="/signin" element={<SignIn onRoleChange={handleRoleChange} onUserDetailsChange={handleUserDetailsChange} />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/test" element={<Test />} />            
+              </Routes>
+            
           </div>
-        </>
-      ) : (
-        <div className="auth-content">
-          <Routes>
-            <Route path="/signin" element={<SignIn onRoleChange={handleRoleChange} onUserDetailsChange={handleUserDetailsChange} />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/test" element={<Test />} />
-          </Routes>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </UserProvider>
   );
 }
 

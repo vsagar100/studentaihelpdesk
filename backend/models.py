@@ -20,8 +20,22 @@ class User(db.Model):
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     modified_by = db.Column(db.String(100))
     modified_date = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
-    
     current_workload = db.Column(db.Integer, default=0)
+
+    # def __init__(self, user_id, username, password, email, role, department, created_by, created_date, 
+    # modified_by, modified_date, current_workload, grievance_count, file_path):
+    #     self.user_id = user_id
+    #     self.username = username
+    #     self.password = password
+    #     self.email = email
+    #     self.role = role
+    #     self.department = department
+    #     self.created_by = created_by
+    #     self.created_date = created_date
+    #     self.modified_by = modified_by
+    #     self.current_workload = current_workload
+    #     self.grievance_count = grievance_count
+    #     self.file_path = file_path
 
     # Hash the password before storing it in the database
     def set_password(self, password):
@@ -104,6 +118,18 @@ class Notification(db.Model):
     created_date = db.Column(db.DateTime, default=db.func.current_timestamp())
     modified_by = db.Column(db.String(100), nullable=False)
     modified_date = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+
+class Announcement(db.Model):
+    __tablename__ = 'announcements'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    category = db.Column(db.String(100), nullable=False)
+    is_expired = db.Column(db.Boolean, default=False)
+    file_path = db.Column(db.String(255), nullable=True)
+    created_by = db.Column(db.Integer, nullable=False)  # ID of the admin user
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now)
+    modified_at = db.Column(db.DateTime, onupdate=datetime.datetime.now)
     
     
         

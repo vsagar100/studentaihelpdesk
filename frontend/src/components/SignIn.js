@@ -4,6 +4,7 @@ import { GlobalContext } from '../GlobalState';
 import '../styles/SignIn.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import { UserContext } from './UserContext';
 
 const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
   const { BACKEND_API_URL } = useContext(GlobalContext);
@@ -12,6 +13,7 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);  // Access user and setUser from context
 
   useEffect(() => {
     const rememberedEmail = localStorage.getItem('rememberedEmail');
@@ -21,13 +23,20 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
     }
   }, []);
 
+  // Log user when it gets updated
+  useEffect(() => {
+    if (user) {
+      console.log('User updated in Context:', user);  // This will log when user state updates
+    }
+  }, [user]);
+
   const handleRoleChange = (newRole) => {
     setRole(newRole.toLowerCase());
     if (onRoleChange) onRoleChange(newRole.toLowerCase());
   };
 
   const handleSignIn = async (e) => {
-    e.preventDefault();
+     e.preventDefault();
     try {
       const response = await fetch(`${BACKEND_API_URL}/api/auth/signin`, {
         method: 'POST',
@@ -37,20 +46,18 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
 
       const data = await response.json();
       if (data.status === 'success') {
-        const userRole = data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1);
-        onRoleChange(userRole);
-        onUserDetailsChange(data.user.username, data.user.file_path != null ? data.user.file_path : '');
+        // Set user in UserContext
+        setUser({
+          username: data.user.username,
+          role: data.user.role,
+          file_path: data.user.file_path,
+        });
+
+        // Store token in localStorage (if needed for future requests)
         localStorage.setItem('token', data.token);
-        localStorage.setItem('userRole', userRole);
-        localStorage.setItem('userName', data.user.username);
-        localStorage.setItem('userProfilePic', data.user.file_path != null ? data.user.file_path : '');
 
-        if (rememberMe) {
-          localStorage.setItem('rememberedEmail', email);
-        } else {
-          localStorage.removeItem('rememberedEmail');
-        }
-
+        // Navigate to dashboard
+        const userRole = data.user.role.charAt(0).toUpperCase() + data.user.role.slice(1);
         navigate(`/${userRole.toLowerCase()}/dashboard`);
       } else {
         alert(data.message);
@@ -65,28 +72,6 @@ const SignIn = ({ onRoleChange, onUserDetailsChange }) => {
     <div className="signin-container">
       <h1 className="main-heading">Grievance System</h1>
       <h2 className="sub-heading">Sign In</h2>
-      {/*
-      <div className="role-selection">
-        <button
-          className={`role-button ${role === 'admin' ? 'active' : ''}`}
-          onClick={() => handleRoleChange('admin')}
-        >
-          Admin
-        </button>
-        <button
-          className={`role-button ${role === 'student' ? 'active' : ''}`}
-          onClick={() => handleRoleChange('student')}
-        >
-          Student
-        </button>
-        <button
-          className={`role-button ${role === 'staff' ? 'active' : ''}`}
-          onClick={() => handleRoleChange('staff')}
-        >
-          Staff
-        </button>
-      </div>
-      */}
       <form onSubmit={handleSignIn}>
         <div className="form-group">
           <div className="input-wrapper">

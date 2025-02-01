@@ -25,8 +25,13 @@ const SubmitGrievance = ({ onSubmit, handleClose }) => {
       handleClose(); // Close modal if submission is successful
     } catch (error) {
       setError('Failed to submit grievance');
+      console.log(error);
       showFeedback('error', 'Failed to submit grievance.'); // Show error feedback
     }
+  };
+  
+  const showFeedback = (type, message) => {
+    setFeedback({ show: true, type, message });
   };
 
   return (

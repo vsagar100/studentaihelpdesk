@@ -1,14 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom'; // Use useNavigate for navigation
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faUser, faBook, faBell, faCog, faQuestionCircle } from '@fortawesome/free-solid-svg-icons'; // Example icons
+import { faHome, faUser, faBook, faBell, faCog, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import '../styles/SideBar.css';
+import { UserContext } from './UserContext'; // Import UserContext
 
-const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
+const Sidebar = ({ isSidebarOpen }) => {
+  const { user, setUser } = useContext(UserContext); // Get user and setUser from context
+  const navigate = useNavigate(); // For navigating on logout
+  
+  const toCamelCase = (str) => {
+  return str
+    .toLowerCase() // Convert the whole string to lower case
+    .split(' ')    // Split the string by spaces
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(' ');    // Join the words back together
+};
+
   let menuItems = [];
 
   // Define menu items based on user role
-  if (userRole != null && userRole.toLowerCase() === 'student') {
+  if (user && user.role && user.role.toLowerCase() === 'student') {
     menuItems = [
       { path: '/student/dashboard', label: 'Dashboard', icon: faHome },
       { path: '/student/helpdesk', label: 'Question', icon: faQuestionCircle },
@@ -21,7 +33,7 @@ const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
       { path: '/student/activities', label: 'Student Activities', icon: faUser },
       { path: '/student/support', label: 'Support', icon: faQuestionCircle },
     ];
-  } else if (userRole != null && userRole.toLowerCase() === 'staff') {
+  } else if (user && user.role && user.role.toLowerCase() === 'staff') {
     menuItems = [
       { path: '/staff/dashboard', label: 'Dashboard', icon: faHome },
       { path: '/staff/assigned-grievances', label: 'Assigned Grievances', icon: faUser },
@@ -31,7 +43,7 @@ const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
       { path: '/staff/settings', label: 'Settings', icon: faCog },
       { path: '/staff/support', label: 'Support', icon: faQuestionCircle },
     ];
-  } else if (userRole != null && userRole.toLowerCase() === 'admin') {
+  } else if (user && user.role && user.role.toLowerCase() === 'admin') {
     menuItems = [
       { path: '/admin/dashboard', label: 'Dashboard', icon: faHome },
       { path: '/admin/manage-staff', label: 'Manage Staff', icon: faUser },
@@ -43,13 +55,11 @@ const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
       { path: '/admin/support', label: 'Support', icon: faQuestionCircle },
     ];
   }
-  
+
   const handleLogout = () => {
-    // Clear the session
-    localStorage.removeItem('token');
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userProfilePic');
+    // Clear user context and token
+    setUser(null); // Reset user context
+    localStorage.removeItem('token'); // Clear token from localStorage if applicable
     navigate('/signin'); // Redirect to SignIn page
   };
 
@@ -57,12 +67,13 @@ const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
     <div className={`sidebar ${isSidebarOpen ? 'open' : 'collapsed'}`}>
       {/* User Profile Section */}
       <div className="user-profile">
-        <img src={userProfilePic} alt="User Profile" className="profile-pic" />
+        <img src={user?.file_path || '/default-profile-pic.jpg'} alt="User Profile" className="profile-pic" />
         <div className="user-info">
-          <span className="user-name">{userName}</span>
-          <span className="user-role">{userRole}</span>
+          <span className="user-name">{user?.username ? toCamelCase(user.username) : 'Guest'}</span>
+          {/* <span className="user-role">{user?.role ? toCamelCase(user.role) : 'No Role Assigned'}</span> */}
         </div>
       </div>
+
       {/* Menu Items */}
       <ul>
         {menuItems.map((item, index) => (
@@ -74,7 +85,11 @@ const Sidebar = ({ isSidebarOpen, userRole, userName, userProfilePic }) => {
           </li>
         ))}
         <li>
-          <Link onClick={handleLogout} to='#'>
+          <Link  onClick={(e) => {
+            e.preventDefault(); // Prevent default link behavior
+            handleLogout();
+          }} 
+          to="#">
             <FontAwesomeIcon icon={faUser} className="icon" />
             <span className="menu-label">Logout</span>
           </Link>
