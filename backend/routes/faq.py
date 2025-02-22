@@ -131,7 +131,7 @@ def regenerate_invalid_embeddings():
         except (ValueError, TypeError, json.JSONDecodeError):
             # If embedding is invalid, regenerate it
             print(f"Regenerating embedding for FAQ ID {faq.id}")
-            response = openai.Embedding.create(input=faq.question, model="text-embedding-ada-002")
+            response = client.embeddings.create(input=faq.question, model="text-embedding-ada-002")
             embedding_vector = response['data'][0]['embedding']
             faq.set_embedding(embedding_vector)
             db.session.commit()
@@ -187,9 +187,6 @@ def update_faq(faq_id):
           return jsonify({"status": "error", "message": "FAQ not found, FAQ not updated."}), 404 
               
         #faq = FAQ(faq_id=faq_id, question=question, answer=answer, keywords=keywords)
-        print(faq_id)
-        print(faq)
-        print(keywords)
         faq.question = question
         faq.answer = answer
         faq.keywords = keywords
