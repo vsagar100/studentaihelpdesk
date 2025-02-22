@@ -1,7 +1,8 @@
 import os
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:////home/azureuser/code/studentaihelpdesk/DB/grievance_system.db'
+    basedir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'DB', 'grievance_system.db')
     FRONTEND_URL = "http://vm-ae-mvn-ubn22.australiaeast.cloudapp.azure.com:3000"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SYSTEM_USER_ID = 'grievance_system'
