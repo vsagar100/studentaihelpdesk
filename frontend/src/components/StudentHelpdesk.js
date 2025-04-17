@@ -167,7 +167,7 @@ const StudentHelpdesk = () => {
                   }} 
                 />
                 <Typography variant="h6" sx={{ mb: 1 }}>
-                  How can I help you today?
+                  Welcome to Kadwa Polytechnic, how can I help you today?
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   Ask me anything about your studies!

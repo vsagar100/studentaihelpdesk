@@ -7,7 +7,7 @@ REM ==============================
 REM Variables
 set NODE_INSTALLER_URL=https://nodejs.org/download/release/v16.20.2/node-v16.20.2-x64.msi
 set PYTHON_INSTALLER_URL=https://www.python.org/ftp/python/3.12.6/python-3.12.6.exe
-set PROJECTS_DIR=C:\Projects
+set PROJECTS_DIR=C:\Projects\studenthelpdesk
 set FLASH_DRIVE= C:\Users\azureuser\Documents\studentaihelpdesk
 set BACKEND_DIR=%PROJECTS_DIR%\backend
 set FRONTEND_DIR=%PROJECTS_DIR%\frontend
@@ -64,11 +64,6 @@ echo Installing Node.js packages...
 cd "%FRONTEND_DIR%"
 call npm install || echo "npm install failed" && exit /b
 cd ..
-
-REM Step 7: Initialize Database
-echo Initializing SQLite database...
-cd "%BACKEND_DIR%"
-flask db upgrade
 
 REM Step 8: Start Servers
 echo Starting backend server...
