@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar';
 
 import AdminUserManagement from './components/AdminUserManagement';
 import AdminDashboard from './components/AdminDashboard';
-import StudentHelpdesk from './components/StudentHelpdesk';
+import AIHelpdesk from './components/AIHelpdesk';
 import SignIn from './components/SignIn';
 import { SidebarContext } from './contexts/SidebarContext';
 import './App.css';
@@ -60,7 +60,7 @@ function App() {
       ) : (
         <Routes>
           <Route path="/adminsignin" element={<SignIn />} />
-          <Route path="/chat" element={<StudentHelpdesk />} />
+          <Route path="/chat" element={<AIHelpdesk />} />
           <Route path="/" element={<Navigate to="/chat" replace />} />
         </Routes>
       )}

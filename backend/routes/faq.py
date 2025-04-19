@@ -255,14 +255,14 @@ def query_faq():
     if faq_answer:
       print(f"FAQ Answer: {faq_answer}")
       print(similarity)
-      bot_context.append({'role': 'system', 'content': f"You are Student AI Helpdesk bot. **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE, POLITICAL OPIONION SHOULD BE STRICTLY AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. ** \n FAQ answer to be formatted in well english: {faq_answer}\n"})
+      bot_context.append({'role': 'system', 'content': f"You are Hotel Seven Stars bot. **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE, POLITICAL OPIONION SHOULD BE STRICTLY AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. ** \n FAQ answer to be formatted in well english: {faq_answer}\n"})
       bot_context.append({'role': 'user', 'content': f"User Query:{description}  \n "})
         # If a matching FAQ is found with high similarity, return the FAQ answer
         #return jsonify({"response": faq_answer}), 200
 
     else:  
       faq_context = "\n".join([f"Q: {faq['question']}\nA: {faq['answer']}" for faq in faq_data])
-      faq_context = "You are Student AI Helpdesk bot \n If answer is not in FAQ but based on FAQ you can think answer if question is **NOT** specific to something, do not mention you are referring to FAQs while answering. Given below are FAQs, you can refer to them while answering. \n **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE, POLITICAL OPIONION SHOULD BE STRICTLY AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. **FAQs: ```" + faq_context + "```"
+      faq_context = "You are Hotel Seven Stars bot \n If answer is not in FAQ but based on FAQ you can think answer if question is **NOT** specific to something, do not mention you are referring to FAQs while answering. Given below are FAQs, you can refer to them while answering. \n **Note: SENSITIVE TOPICS/CONTENTS LIKE SEX, RACISM, RELIGION, CASTE, POLITICAL OPIONION SHOULD BE STRICTLY AVOIDED AT ALL, NO PERSONAL OPINION ON LEADER's PERSONALITY SHOULD BE GIVEN LIKE WHO IS NARENDRA MODI YOU CAN TELL ABOUT HIS CURRENT CAPACITY BUT NOT LIKE WHAT ARE HIS VIEWS AND HIS AGENDA...ETC. **FAQs: ```" + faq_context + "```"
 
       bot_context.append({'role': 'system', 'content': f"{faq_context}"})    
       bot_context.append({'role': 'user', 'content': f"{description}"})
