@@ -23,14 +23,16 @@
   width: 60px; /* Adjust width for collapsed state */
 }
 
+/* Update main-area and footer transitions */
 .main-area {
-  flex-grow: 1;
-  margin-left: 250px; /* Default margin to accommodate the sidebar */
-  transition: margin-left 0.3s ease; /* Smooth transition for sidebar toggle */
+  margin-left: 250px;
+  transition: margin-left 0.3s ease, width 0.3s ease; /* Add width transition */
+  width: calc(100% - 250px); /* Dynamic width calculation */
 }
 
 .app-container.sidebar-collapsed .main-area {
-  margin-left: 60px; /* Adjust margin for collapsed sidebar */
+  margin-left: 60px;
+  width: calc(100% - 60px); /* Dynamic width adjustment */
 }
 
 .main-content {

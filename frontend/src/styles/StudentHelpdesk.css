@@ -1,33 +1,28 @@
 /* Container for the helpdesk */
 .helpdesk-container {
-  max-width: 100%; /* Full width */
+  min-width: 100%; /* Full width */
   width: 100%;
-  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 12px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Arial', sans-serif;
+  background-color: #f0f4f8; /* Slightly off-white background for a soft look */
+
 }
 
 /* Input form styling */
 .helpdesk-form {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch; /* Stretch to full width */
-  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: #f9f9f9;
+  z-index: 100;
+  padding: 20px 0;
+  margin-bottom: 0;
 }
 
 .query-input {
-  width: 100%; /* Full width */
-  height: 80px; /* Increased height */
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 1.1rem;
-  resize: none; /* Prevent resize */
-  margin-bottom: 15px;
-  overflow-y: auto; /* Add scrollbar */
+  min-height: 100px;
+  max-height: 200px;
+  height: auto;
   transition: all 0.3s ease;
 }
 
@@ -71,13 +66,13 @@
 }
 
 /* Chat history */
+/* Chat History Improvements */
 .chat-history {
-  max-height: 400px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-  background-color: white;
+  max-height: 60vh; /* Viewport-based height */
+  min-height: 300px; /* Minimum readable height */
+  display: flex;
+  flex-direction: column-reverse; /* New messages at bottom */
   padding: 15px;
-  border-radius: 8px;
 }
 
 .chat-message {

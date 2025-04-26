@@ -86,6 +86,16 @@ const StudentHelpdesk = () => {
         type={feedback.type}
         message={feedback.message}
       />
+       {/* Chat history below */}
+       <div className="chat-history">
+      {chatHistory.slice().map((message, index) => (
+      <div key={index} className={`chat-message ${message.role}`}>
+        <strong>{message.role === 'user' ? 'You' : 'AI Assistant'}:</strong>
+        <p>{message.content}</p>
+      </div>
+      ))}
+        {isLoading && <div className="loading-spinner">AI is thinking...</div>}
+      </div>
       <form onSubmit={handleSubmit} className="helpdesk-form">
         {/* Input form on top */}
         <textarea
@@ -117,16 +127,7 @@ const StudentHelpdesk = () => {
         </button>
       </form>
 
-      {/* Chat history below */}
-      <div className="chat-history">
-        {chatHistory.map((message, index) => (
-          <div key={index} className={`chat-message ${message.role}`}>
-            <strong>{message.role === 'user' ? 'You' : 'AI Assistant'}:</strong>
-            <p>{message.content}</p>
-          </div>
-        ))}
-        {isLoading && <div className="loading-spinner">AI is thinking...</div>}
-      </div>
+     
     </div>
     
     
